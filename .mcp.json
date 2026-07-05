@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "openai-gpt-image": {
+      "command": "npx",
+      "args": ["openai-gpt-image-mcp-199bio"],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}"
+      }
+    }
+  }
+}
