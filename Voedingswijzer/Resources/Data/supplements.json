@@ -1,0 +1,92 @@
+{
+  "supplements": [
+    {
+      "id": "creatine",
+      "name": "Creatine",
+      "dose": 5,
+      "unit": "g",
+      "defaultOn": true
+    },
+    {
+      "id": "vitd",
+      "name": "Vitamine D3",
+      "dose": 25,
+      "unit": "µg",
+      "defaultOn": true,
+      "nutrient": "vd"
+    },
+    {
+      "id": "multi",
+      "name": "Multivitamine",
+      "dose": 1,
+      "unit": "tablet",
+      "defaultOn": true,
+      "perUnit": {
+        "vc": 80,
+        "va": 400,
+        "vd": 10,
+        "b12": 2.5,
+        "fol": 200,
+        "fe": 7,
+        "ca": 120,
+        "mg": 60,
+        "zn": 5
+      }
+    },
+    {
+      "id": "omega3",
+      "name": "Omega-3 visolie",
+      "dose": 1000,
+      "unit": "mg",
+      "defaultOn": true
+    },
+    {
+      "id": "mag",
+      "name": "Magnesium",
+      "dose": 200,
+      "unit": "mg",
+      "defaultOn": false,
+      "nutrient": "mg"
+    },
+    {
+      "id": "b12",
+      "name": "Vitamine B12",
+      "dose": 100,
+      "unit": "µg",
+      "defaultOn": false,
+      "nutrient": "b12"
+    },
+    {
+      "id": "zink",
+      "name": "Zink",
+      "dose": 10,
+      "unit": "mg",
+      "defaultOn": false,
+      "nutrient": "zn"
+    },
+    {
+      "id": "ijzer",
+      "name": "IJzer",
+      "dose": 14,
+      "unit": "mg",
+      "defaultOn": false,
+      "nutrient": "fe"
+    },
+    {
+      "id": "vitc",
+      "name": "Vitamine C",
+      "dose": 500,
+      "unit": "mg",
+      "defaultOn": false,
+      "nutrient": "vc"
+    },
+    {
+      "id": "calcium",
+      "name": "Calcium",
+      "dose": 500,
+      "unit": "mg",
+      "defaultOn": false,
+      "nutrient": "ca"
+    }
+  ]
+}

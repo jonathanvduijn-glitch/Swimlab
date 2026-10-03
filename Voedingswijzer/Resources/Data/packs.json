@@ -1,0 +1,869 @@
+{
+  "aisles": [
+    "Groente & fruit",
+    "Brood",
+    "Ontbijt & beleg",
+    "Zuivel & eieren",
+    "Kaas & vleeswaren",
+    "Vlees & vis",
+    "Pasta, rijst & granen",
+    "Conserven & peulvruchten",
+    "Diepvries",
+    "Noten & snacks",
+    "Sportvoeding",
+    "Olie & sauzen"
+  ],
+  "packs": {
+    "Volkorenbrood": {
+      "aisle": "Brood",
+      "singular": "brood (800 g)",
+      "plural": "broden (800 g)",
+      "grams": 800,
+      "conversion": 1
+    },
+    "Roggebrood": {
+      "aisle": "Brood",
+      "singular": "pak (500 g)",
+      "plural": "pakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Volkoren wrap": {
+      "aisle": "Brood",
+      "singular": "pak wraps (6 st.)",
+      "plural": "pakken wraps (6 st.)",
+      "grams": 370,
+      "conversion": 1
+    },
+    "Rijstwafel": {
+      "aisle": "Brood",
+      "singular": "pak (130 g)",
+      "plural": "pakken (130 g)",
+      "grams": 130,
+      "conversion": 1
+    },
+    "Havermout": {
+      "aisle": "Ontbijt & beleg",
+      "singular": "zak (1 kg)",
+      "plural": "zakken (1 kg)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Muesli zonder suiker": {
+      "aisle": "Ontbijt & beleg",
+      "singular": "pak (750 g)",
+      "plural": "pakken (750 g)",
+      "grams": 750,
+      "conversion": 1
+    },
+    "Granola": {
+      "aisle": "Ontbijt & beleg",
+      "singular": "pak (500 g)",
+      "plural": "pakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Pindakaas (100% pinda)": {
+      "aisle": "Ontbijt & beleg",
+      "singular": "pot (350 g)",
+      "plural": "potten (350 g)",
+      "grams": 350,
+      "conversion": 1
+    },
+    "Ei (gekookt)": {
+      "aisle": "Zuivel & eieren",
+      "singular": "doos (10 eieren)",
+      "plural": "dozen (10 eieren)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Eiwit van ei": {
+      "aisle": "Zuivel & eieren",
+      "singular": "pak (500 g)",
+      "plural": "pakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Magere kwark": {
+      "aisle": "Zuivel & eieren",
+      "singular": "emmer (1 kg)",
+      "plural": "emmers (1 kg)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Skyr naturel": {
+      "aisle": "Zuivel & eieren",
+      "singular": "beker (450 g)",
+      "plural": "bekers (450 g)",
+      "grams": 450,
+      "conversion": 1
+    },
+    "Griekse yoghurt 0%": {
+      "aisle": "Zuivel & eieren",
+      "singular": "bak (500 g)",
+      "plural": "bakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Magere yoghurt": {
+      "aisle": "Zuivel & eieren",
+      "singular": "pak (1 L)",
+      "plural": "pakken (1 L)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Volle yoghurt": {
+      "aisle": "Zuivel & eieren",
+      "singular": "pak (1 L)",
+      "plural": "pakken (1 L)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Kefir (mager)": {
+      "aisle": "Zuivel & eieren",
+      "singular": "fles (1 L)",
+      "plural": "flessen (1 L)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Halfvolle melk": {
+      "aisle": "Zuivel & eieren",
+      "singular": "pak (1 L)",
+      "plural": "pakken (1 L)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Sojadrink (ongezoet, verrijkt)": {
+      "aisle": "Zuivel & eieren",
+      "singular": "pak (1 L)",
+      "plural": "pakken (1 L)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Hüttenkäse": {
+      "aisle": "Zuivel & eieren",
+      "singular": "bakje (200 g)",
+      "plural": "bakjes (200 g)",
+      "grams": 200,
+      "conversion": 1
+    },
+    "Halvarine (verrijkt)": {
+      "aisle": "Zuivel & eieren",
+      "singular": "kuipje (500 g)",
+      "plural": "kuipjes (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Roomboter": {
+      "aisle": "Zuivel & eieren",
+      "singular": "pakje (250 g)",
+      "plural": "pakjes (250 g)",
+      "grams": 250,
+      "conversion": 1
+    },
+    "Kaas 30+": {
+      "aisle": "Kaas & vleeswaren",
+      "singular": "stuk (500 g)",
+      "plural": "stukken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Mozzarella light": {
+      "aisle": "Kaas & vleeswaren",
+      "singular": "bol (125 g)",
+      "plural": "bollen (125 g)",
+      "grams": 125,
+      "conversion": 1
+    },
+    "Feta": {
+      "aisle": "Kaas & vleeswaren",
+      "singular": "blok (200 g)",
+      "plural": "blokken (200 g)",
+      "grams": 200,
+      "conversion": 1
+    },
+    "Parmezaanse kaas": {
+      "aisle": "Kaas & vleeswaren",
+      "singular": "stuk (150 g)",
+      "plural": "stukken (150 g)",
+      "grams": 150,
+      "conversion": 1
+    },
+    "Kipfilet (beleg)": {
+      "aisle": "Kaas & vleeswaren",
+      "singular": "pakje (150 g)",
+      "plural": "pakjes (150 g)",
+      "grams": 150,
+      "conversion": 1
+    },
+    "Rookvlees (beleg)": {
+      "aisle": "Kaas & vleeswaren",
+      "singular": "pakje (100 g)",
+      "plural": "pakjes (100 g)",
+      "grams": 100,
+      "conversion": 1
+    },
+    "Hummus": {
+      "aisle": "Kaas & vleeswaren",
+      "singular": "bakje (200 g)",
+      "plural": "bakjes (200 g)",
+      "grams": 200,
+      "conversion": 1
+    },
+    "Kipfilet (gebakken)": {
+      "aisle": "Vlees & vis",
+      "singular": "pak rauw (500 g)",
+      "plural": "pakken rauw (500 g)",
+      "grams": 500,
+      "conversion": 0.75
+    },
+    "Kipdij (gebakken)": {
+      "aisle": "Vlees & vis",
+      "singular": "pak rauw (500 g)",
+      "plural": "pakken rauw (500 g)",
+      "grams": 500,
+      "conversion": 0.75
+    },
+    "Rundergehakt 5% (gebakken)": {
+      "aisle": "Vlees & vis",
+      "singular": "pak rauw (500 g)",
+      "plural": "pakken rauw (500 g)",
+      "grams": 500,
+      "conversion": 0.75
+    },
+    "Kalkoenfilet (gebakken)": {
+      "aisle": "Vlees & vis",
+      "singular": "pak rauw (400 g)",
+      "plural": "pakken rauw (400 g)",
+      "grams": 400,
+      "conversion": 0.75
+    },
+    "Biefstuk (gebakken)": {
+      "aisle": "Vlees & vis",
+      "singular": "pak (2 st., 250 g)",
+      "plural": "pakken (2 st., 250 g)",
+      "grams": 250,
+      "conversion": 0.8
+    },
+    "Varkenshaas (gebakken)": {
+      "aisle": "Vlees & vis",
+      "singular": "stuk (500 g)",
+      "plural": "stukken (500 g)",
+      "grams": 500,
+      "conversion": 0.75
+    },
+    "Zalm (gegaard)": {
+      "aisle": "Vlees & vis",
+      "singular": "pak (2 filets, 250 g)",
+      "plural": "pakken (2 filets, 250 g)",
+      "grams": 250,
+      "conversion": 0.85
+    },
+    "Garnalen (gekookt)": {
+      "aisle": "Vlees & vis",
+      "singular": "bakje (200 g)",
+      "plural": "bakjes (200 g)",
+      "grams": 200,
+      "conversion": 1
+    },
+    "Makreel": {
+      "aisle": "Vlees & vis",
+      "singular": "stuk gerookt (250 g)",
+      "plural": "stukken gerookt (250 g)",
+      "grams": 250,
+      "conversion": 1
+    },
+    "Gerookte zalm": {
+      "aisle": "Vlees & vis",
+      "singular": "pakje (100 g)",
+      "plural": "pakjes (100 g)",
+      "grams": 100,
+      "conversion": 1
+    },
+    "Haring (maatjes)": {
+      "aisle": "Vlees & vis",
+      "singular": "bakje (4 st.)",
+      "plural": "bakjes (4 st.)",
+      "grams": 300,
+      "conversion": 1
+    },
+    "Tofu naturel": {
+      "aisle": "Vlees & vis",
+      "singular": "pak (375 g)",
+      "plural": "pakken (375 g)",
+      "grams": 375,
+      "conversion": 1
+    },
+    "Tempeh": {
+      "aisle": "Vlees & vis",
+      "singular": "pak (200 g)",
+      "plural": "pakken (200 g)",
+      "grams": 200,
+      "conversion": 1
+    },
+    "Seitan": {
+      "aisle": "Vlees & vis",
+      "singular": "pak (200 g)",
+      "plural": "pakken (200 g)",
+      "grams": 200,
+      "conversion": 1
+    },
+    "Witte rijst (gekookt)": {
+      "aisle": "Pasta, rijst & granen",
+      "singular": "zak rijst (1 kg)",
+      "plural": "zakken rijst (1 kg)",
+      "grams": 1000,
+      "conversion": 2.8
+    },
+    "Zilvervliesrijst (gekookt)": {
+      "aisle": "Pasta, rijst & granen",
+      "singular": "zak (1 kg)",
+      "plural": "zakken (1 kg)",
+      "grams": 1000,
+      "conversion": 3.3
+    },
+    "Witte pasta (gekookt)": {
+      "aisle": "Pasta, rijst & granen",
+      "singular": "pak (500 g)",
+      "plural": "pakken (500 g)",
+      "grams": 500,
+      "conversion": 2.3
+    },
+    "Volkorenpasta (gekookt)": {
+      "aisle": "Pasta, rijst & granen",
+      "singular": "pak (500 g)",
+      "plural": "pakken (500 g)",
+      "grams": 500,
+      "conversion": 2.3
+    },
+    "Quinoa (gekookt)": {
+      "aisle": "Pasta, rijst & granen",
+      "singular": "zak (400 g)",
+      "plural": "zakken (400 g)",
+      "grams": 400,
+      "conversion": 3.1
+    },
+    "Couscous (gekookt)": {
+      "aisle": "Pasta, rijst & granen",
+      "singular": "pak (500 g)",
+      "plural": "pakken (500 g)",
+      "grams": 500,
+      "conversion": 3.4
+    },
+    "Bulgur (gekookt)": {
+      "aisle": "Pasta, rijst & granen",
+      "singular": "pak (500 g)",
+      "plural": "pakken (500 g)",
+      "grams": 500,
+      "conversion": 4.1
+    },
+    "Boekweit (gekookt)": {
+      "aisle": "Pasta, rijst & granen",
+      "singular": "pak (500 g)",
+      "plural": "pakken (500 g)",
+      "grams": 500,
+      "conversion": 3.7
+    },
+    "Linzen (gekookt)": {
+      "aisle": "Conserven & peulvruchten",
+      "singular": "pot/blik (250 g uitgelekt)",
+      "plural": "potten/blikken (250 g uitgelekt)",
+      "grams": 250,
+      "conversion": 1
+    },
+    "Kikkererwten (gekookt)": {
+      "aisle": "Conserven & peulvruchten",
+      "singular": "pot/blik (250 g uitgelekt)",
+      "plural": "potten/blikken (250 g uitgelekt)",
+      "grams": 250,
+      "conversion": 1
+    },
+    "Kidneybonen (gekookt)": {
+      "aisle": "Conserven & peulvruchten",
+      "singular": "pot/blik (250 g uitgelekt)",
+      "plural": "potten/blikken (250 g uitgelekt)",
+      "grams": 250,
+      "conversion": 1
+    },
+    "Zwarte bonen (gekookt)": {
+      "aisle": "Conserven & peulvruchten",
+      "singular": "pot/blik (250 g uitgelekt)",
+      "plural": "potten/blikken (250 g uitgelekt)",
+      "grams": 250,
+      "conversion": 1
+    },
+    "Bruine bonen (gekookt)": {
+      "aisle": "Conserven & peulvruchten",
+      "singular": "pot (400 g uitgelekt)",
+      "plural": "potten (400 g uitgelekt)",
+      "grams": 400,
+      "conversion": 1
+    },
+    "Witte bonen in tomatensaus": {
+      "aisle": "Conserven & peulvruchten",
+      "singular": "blik (420 g)",
+      "plural": "blikken (420 g)",
+      "grams": 420,
+      "conversion": 1
+    },
+    "Tonijn in water (blik)": {
+      "aisle": "Conserven & peulvruchten",
+      "singular": "blik tonijn",
+      "plural": "blikken tonijn",
+      "grams": 112,
+      "conversion": 1
+    },
+    "Sardines (blik)": {
+      "aisle": "Conserven & peulvruchten",
+      "singular": "blikje sardines",
+      "plural": "blikjes sardines",
+      "grams": 90,
+      "conversion": 1
+    },
+    "Zuurkool": {
+      "aisle": "Groente & fruit",
+      "singular": "zak (500 g)",
+      "plural": "zakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Rode biet": {
+      "aisle": "Groente & fruit",
+      "singular": "pak gekookt (500 g)",
+      "plural": "pakken gekookt (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Aardappel (gekookt)": {
+      "aisle": "Groente & fruit",
+      "singular": "zak aardappels (2 kg)",
+      "plural": "zakken aardappels (2 kg)",
+      "grams": 2000,
+      "conversion": 1
+    },
+    "Tomaat": {
+      "aisle": "Groente & fruit",
+      "singular": "bak (500 g)",
+      "plural": "bakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Komkommer": {
+      "aisle": "Groente & fruit",
+      "singular": "komkommer",
+      "plural": "komkommers",
+      "grams": 400,
+      "conversion": 1
+    },
+    "Ui": {
+      "aisle": "Groente & fruit",
+      "singular": "net uien (1 kg)",
+      "plural": "netten uien (1 kg)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Wortel": {
+      "aisle": "Groente & fruit",
+      "singular": "zak (1 kg)",
+      "plural": "zakken (1 kg)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Rode paprika": {
+      "aisle": "Groente & fruit",
+      "singular": "paprika",
+      "plural": "paprika's",
+      "grams": 150,
+      "conversion": 1
+    },
+    "Courgette": {
+      "aisle": "Groente & fruit",
+      "singular": "courgette",
+      "plural": "courgettes",
+      "grams": 300,
+      "conversion": 1
+    },
+    "Taugé": {
+      "aisle": "Groente & fruit",
+      "singular": "zak (300 g)",
+      "plural": "zakken (300 g)",
+      "grams": 300,
+      "conversion": 1
+    },
+    "IJsbergsla": {
+      "aisle": "Groente & fruit",
+      "singular": "krop",
+      "plural": "kroppen",
+      "grams": 400,
+      "conversion": 1
+    },
+    "Andijvie": {
+      "aisle": "Groente & fruit",
+      "singular": "zak (500 g)",
+      "plural": "zakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Spruitjes": {
+      "aisle": "Groente & fruit",
+      "singular": "zak (500 g)",
+      "plural": "zakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Paksoi": {
+      "aisle": "Groente & fruit",
+      "singular": "stuk",
+      "plural": "stuks",
+      "grams": 300,
+      "conversion": 1
+    },
+    "Rode kool": {
+      "aisle": "Groente & fruit",
+      "singular": "rode kool",
+      "plural": "rode kolen",
+      "grams": 800,
+      "conversion": 1
+    },
+    "Pompoen": {
+      "aisle": "Groente & fruit",
+      "singular": "pompoen",
+      "plural": "pompoenen",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Asperges": {
+      "aisle": "Groente & fruit",
+      "singular": "bos (500 g)",
+      "plural": "bossen (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Rucola": {
+      "aisle": "Groente & fruit",
+      "singular": "zakje (75 g)",
+      "plural": "zakjes (75 g)",
+      "grams": 75,
+      "conversion": 1
+    },
+    "Waterkers": {
+      "aisle": "Groente & fruit",
+      "singular": "bakje (75 g)",
+      "plural": "bakjes (75 g)",
+      "grams": 75,
+      "conversion": 1
+    },
+    "Witlof": {
+      "aisle": "Groente & fruit",
+      "singular": "zak (500 g)",
+      "plural": "zakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Champignons": {
+      "aisle": "Groente & fruit",
+      "singular": "bakje (250 g)",
+      "plural": "bakjes (250 g)",
+      "grams": 250,
+      "conversion": 1
+    },
+    "Zoete aardappel": {
+      "aisle": "Groente & fruit",
+      "singular": "zak (1 kg)",
+      "plural": "zakken (1 kg)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Prei": {
+      "aisle": "Groente & fruit",
+      "singular": "prei",
+      "plural": "preien",
+      "grams": 250,
+      "conversion": 1
+    },
+    "Broccoli": {
+      "aisle": "Groente & fruit",
+      "singular": "broccoli",
+      "plural": "broccoli's",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Bloemkool": {
+      "aisle": "Groente & fruit",
+      "singular": "bloemkool",
+      "plural": "bloemkolen",
+      "grams": 600,
+      "conversion": 1
+    },
+    "Boerenkool": {
+      "aisle": "Groente & fruit",
+      "singular": "zak gesneden (500 g)",
+      "plural": "zakken gesneden (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Banaan": {
+      "aisle": "Groente & fruit",
+      "singular": "banaan",
+      "plural": "bananen",
+      "grams": 120,
+      "conversion": 1
+    },
+    "Appel": {
+      "aisle": "Groente & fruit",
+      "singular": "appel",
+      "plural": "appels",
+      "grams": 150,
+      "conversion": 1
+    },
+    "Mandarijn": {
+      "aisle": "Groente & fruit",
+      "singular": "mandarijn",
+      "plural": "mandarijnen",
+      "grams": 70,
+      "conversion": 1
+    },
+    "Peer": {
+      "aisle": "Groente & fruit",
+      "singular": "peer",
+      "plural": "peren",
+      "grams": 170,
+      "conversion": 1
+    },
+    "Kiwi": {
+      "aisle": "Groente & fruit",
+      "singular": "kiwi",
+      "plural": "kiwi's",
+      "grams": 80,
+      "conversion": 1
+    },
+    "Sinaasappel": {
+      "aisle": "Groente & fruit",
+      "singular": "sinaasappel",
+      "plural": "sinaasappels",
+      "grams": 150,
+      "conversion": 1
+    },
+    "Ananas": {
+      "aisle": "Groente & fruit",
+      "singular": "ananas",
+      "plural": "ananassen",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Mango": {
+      "aisle": "Groente & fruit",
+      "singular": "mango",
+      "plural": "mango's",
+      "grams": 300,
+      "conversion": 1
+    },
+    "Granaatappel": {
+      "aisle": "Groente & fruit",
+      "singular": "granaatappel",
+      "plural": "granaatappels",
+      "grams": 150,
+      "conversion": 1
+    },
+    "Avocado": {
+      "aisle": "Groente & fruit",
+      "singular": "avocado",
+      "plural": "avocado's",
+      "grams": 150,
+      "conversion": 1
+    },
+    "Bramen": {
+      "aisle": "Groente & fruit",
+      "singular": "bakje (125 g)",
+      "plural": "bakjes (125 g)",
+      "grams": 125,
+      "conversion": 1
+    },
+    "Druiven": {
+      "aisle": "Groente & fruit",
+      "singular": "bak (500 g)",
+      "plural": "bakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Meloen": {
+      "aisle": "Groente & fruit",
+      "singular": "meloen",
+      "plural": "meloenen",
+      "grams": 800,
+      "conversion": 1
+    },
+    "Spinazie": {
+      "aisle": "Diepvries",
+      "singular": "zak spinazie (750 g)",
+      "plural": "zakken spinazie (750 g)",
+      "grams": 750,
+      "conversion": 1
+    },
+    "Doperwten": {
+      "aisle": "Diepvries",
+      "singular": "zak (750 g)",
+      "plural": "zakken (750 g)",
+      "grams": 750,
+      "conversion": 1
+    },
+    "Sperziebonen": {
+      "aisle": "Diepvries",
+      "singular": "zak (750 g)",
+      "plural": "zakken (750 g)",
+      "grams": 750,
+      "conversion": 1
+    },
+    "Edamame": {
+      "aisle": "Diepvries",
+      "singular": "zak (500 g)",
+      "plural": "zakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Aardbeien": {
+      "aisle": "Diepvries",
+      "singular": "zak (500 g)",
+      "plural": "zakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Blauwe bessen": {
+      "aisle": "Diepvries",
+      "singular": "zak (500 g)",
+      "plural": "zakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Frambozen": {
+      "aisle": "Diepvries",
+      "singular": "zak (300 g)",
+      "plural": "zakken (300 g)",
+      "grams": 300,
+      "conversion": 1
+    },
+    "Kabeljauw (gegaard)": {
+      "aisle": "Diepvries",
+      "singular": "pak (400 g)",
+      "plural": "pakken (400 g)",
+      "grams": 400,
+      "conversion": 0.8
+    },
+    "Tilapia (gegaard)": {
+      "aisle": "Diepvries",
+      "singular": "pak witvis (400 g)",
+      "plural": "pakken witvis (400 g)",
+      "grams": 400,
+      "conversion": 0.8
+    },
+    "Amandelen": {
+      "aisle": "Noten & snacks",
+      "singular": "zak (200 g)",
+      "plural": "zakken (200 g)",
+      "grams": 200,
+      "conversion": 1
+    },
+    "Walnoten": {
+      "aisle": "Noten & snacks",
+      "singular": "zak (200 g)",
+      "plural": "zakken (200 g)",
+      "grams": 200,
+      "conversion": 1
+    },
+    "Pompoenpitten": {
+      "aisle": "Noten & snacks",
+      "singular": "zak (200 g)",
+      "plural": "zakken (200 g)",
+      "grams": 200,
+      "conversion": 1
+    },
+    "Chiazaad": {
+      "aisle": "Noten & snacks",
+      "singular": "zak (250 g)",
+      "plural": "zakken (250 g)",
+      "grams": 250,
+      "conversion": 1
+    },
+    "Lijnzaad": {
+      "aisle": "Noten & snacks",
+      "singular": "zak (250 g)",
+      "plural": "zakken (250 g)",
+      "grams": 250,
+      "conversion": 1
+    },
+    "Pinda's (ongezouten)": {
+      "aisle": "Noten & snacks",
+      "singular": "zak (500 g)",
+      "plural": "zakken (500 g)",
+      "grams": 500,
+      "conversion": 1
+    },
+    "Hazelnoten": {
+      "aisle": "Noten & snacks",
+      "singular": "zak (200 g)",
+      "plural": "zakken (200 g)",
+      "grams": 200,
+      "conversion": 1
+    },
+    "Pure chocolade 85%": {
+      "aisle": "Noten & snacks",
+      "singular": "reep (100 g)",
+      "plural": "repen (100 g)",
+      "grams": 100,
+      "conversion": 1
+    },
+    "Whey-eiwitpoeder": {
+      "aisle": "Sportvoeding",
+      "singular": "zak (1 kg)",
+      "plural": "zakken (1 kg)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Caseïne-eiwitpoeder": {
+      "aisle": "Sportvoeding",
+      "singular": "zak (1 kg)",
+      "plural": "zakken (1 kg)",
+      "grams": 1000,
+      "conversion": 1
+    },
+    "Proteïnereep": {
+      "aisle": "Sportvoeding",
+      "singular": "reep",
+      "plural": "repen",
+      "grams": 60,
+      "conversion": 1
+    },
+    "Olijfolie": {
+      "aisle": "Olie & sauzen",
+      "singular": "fles (500 ml)",
+      "plural": "flessen (500 ml)",
+      "grams": 460,
+      "conversion": 1
+    },
+    "Sojasaus": {
+      "aisle": "Olie & sauzen",
+      "singular": "fles (150 ml)",
+      "plural": "flessen (150 ml)",
+      "grams": 150,
+      "conversion": 1
+    }
+  },
+  "categoryAisles": {
+    "Groente": "Groente & fruit",
+    "Fruit": "Groente & fruit",
+    "Vlees & vis": "Vlees & vis",
+    "Zuivel & ei": "Zuivel & eieren",
+    "Peulvruchten & soja": "Conserven & peulvruchten",
+    "Granen & aardappel": "Pasta, rijst & granen",
+    "Noten & zaden": "Noten & snacks",
+    "Sport & snacks": "Sportvoeding",
+    "Vetten & sauzen": "Olie & sauzen"
+  },
+  "fallback": {
+    "aisle": "Ontbijt & beleg",
+    "singular": "verpakking",
+    "plural": "verpakkingen",
+    "grams": 500,
+    "conversion": 1
+  }
+}

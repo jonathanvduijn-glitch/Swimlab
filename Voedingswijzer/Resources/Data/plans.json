@@ -1,0 +1,2541 @@
+{
+  "slots": [
+    {
+      "id": "ontbijt",
+      "name": "Ontbijt"
+    },
+    {
+      "id": "lunch",
+      "name": "Lunch"
+    },
+    {
+      "id": "tussendoor",
+      "name": "Tussendoor"
+    },
+    {
+      "id": "avond",
+      "name": "Avondeten"
+    },
+    {
+      "id": "avondsnack",
+      "name": "Avondsnack"
+    }
+  ],
+  "days": [
+    "Maandag",
+    "Dinsdag",
+    "Woensdag",
+    "Donderdag",
+    "Vrijdag",
+    "Zaterdag",
+    "Zondag"
+  ],
+  "menus": {
+    "budget": {
+      "name": "Gangbaar & goedkoop",
+      "meals": {
+        "ontbijt": [
+          {
+            "name": "Brood met ei en kip",
+            "items": [
+              {
+                "food": "Volkorenbrood",
+                "grams": 105
+              },
+              {
+                "food": "Ei (gekookt)",
+                "grams": 150
+              },
+              {
+                "food": "Kipfilet (beleg)",
+                "grams": 50
+              },
+              {
+                "food": "Halvarine (verrijkt)",
+                "grams": 5
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Havermout met melk",
+            "items": [
+              {
+                "food": "Havermout",
+                "grams": 70
+              },
+              {
+                "food": "Halfvolle melk",
+                "grams": 300
+              },
+              {
+                "food": "Magere kwark",
+                "grams": 150
+              },
+              {
+                "food": "Banaan",
+                "grams": 100
+              },
+              {
+                "food": "Pindakaas (100% pinda)",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Kwark met havermout en appel",
+            "items": [
+              {
+                "food": "Magere kwark",
+                "grams": 400
+              },
+              {
+                "food": "Havermout",
+                "grams": 50
+              },
+              {
+                "food": "Appel",
+                "grams": 150
+              },
+              {
+                "food": "Pindakaas (100% pinda)",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Boterhammen met kaas en kip",
+            "items": [
+              {
+                "food": "Volkorenbrood",
+                "grams": 140
+              },
+              {
+                "food": "Kaas 30+",
+                "grams": 40
+              },
+              {
+                "food": "Kipfilet (beleg)",
+                "grams": 50
+              },
+              {
+                "food": "Halvarine (verrijkt)",
+                "grams": 5
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              },
+              {
+                "food": "Halfvolle melk",
+                "grams": 250
+              }
+            ]
+          },
+          {
+            "name": "Yoghurt met muesli",
+            "items": [
+              {
+                "food": "Magere yoghurt",
+                "grams": 300
+              },
+              {
+                "food": "Magere kwark",
+                "grams": 150
+              },
+              {
+                "food": "Muesli zonder suiker",
+                "grams": 60
+              },
+              {
+                "food": "Banaan",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Roerei met roggebrood",
+            "items": [
+              {
+                "food": "Ei (gekookt)",
+                "grams": 150
+              },
+              {
+                "food": "Halfvolle melk",
+                "grams": 50
+              },
+              {
+                "food": "Champignons",
+                "grams": 100
+              },
+              {
+                "food": "Roggebrood",
+                "grams": 100
+              },
+              {
+                "food": "Hüttenkäse",
+                "grams": 100
+              },
+              {
+                "food": "Halvarine (verrijkt)",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Pindakaasboterham met melk",
+            "items": [
+              {
+                "food": "Volkorenbrood",
+                "grams": 105
+              },
+              {
+                "food": "Pindakaas (100% pinda)",
+                "grams": 20
+              },
+              {
+                "food": "Banaan",
+                "grams": 100
+              },
+              {
+                "food": "Halfvolle melk",
+                "grams": 300
+              },
+              {
+                "food": "Magere kwark",
+                "grams": 150
+              }
+            ]
+          },
+          {
+            "name": "Wentelteefjes met kwark",
+            "items": [
+              {
+                "food": "Volkorenbrood",
+                "grams": 105
+              },
+              {
+                "food": "Ei (gekookt)",
+                "grams": 100
+              },
+              {
+                "food": "Halfvolle melk",
+                "grams": 100
+              },
+              {
+                "food": "Magere kwark",
+                "grams": 200
+              },
+              {
+                "food": "Aardbeien",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Overnight oats",
+            "items": [
+              {
+                "food": "Havermout",
+                "grams": 60
+              },
+              {
+                "food": "Magere kwark",
+                "grams": 250
+              },
+              {
+                "food": "Halfvolle melk",
+                "grams": 100
+              },
+              {
+                "food": "Blauwe bessen",
+                "grams": 75
+              },
+              {
+                "food": "Pindakaas (100% pinda)",
+                "grams": 10
+              }
+            ]
+          }
+        ],
+        "lunch": [
+          {
+            "name": "Broodjes kip en ei",
+            "items": [
+              {
+                "food": "Volkorenbrood",
+                "grams": 140
+              },
+              {
+                "food": "Kipfilet (beleg)",
+                "grams": 75
+              },
+              {
+                "food": "Ei (gekookt)",
+                "grams": 50
+              },
+              {
+                "food": "Hüttenkäse",
+                "grams": 100
+              },
+              {
+                "food": "Halvarine (verrijkt)",
+                "grams": 5
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              },
+              {
+                "food": "Appel",
+                "grams": 150
+              }
+            ]
+          },
+          {
+            "name": "Brood met tonijnsalade",
+            "items": [
+              {
+                "food": "Volkorenbrood",
+                "grams": 140
+              },
+              {
+                "food": "Tonijn in water (blik)",
+                "grams": 120
+              },
+              {
+                "food": "Magere yoghurt",
+                "grams": 50
+              },
+              {
+                "food": "Ui",
+                "grams": 30
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              },
+              {
+                "food": "Banaan",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Koude pastasalade met kip",
+            "items": [
+              {
+                "food": "Witte pasta (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Kipfilet (gebakken)",
+                "grams": 100
+              },
+              {
+                "food": "Rode paprika",
+                "grams": 100
+              },
+              {
+                "food": "Doperwten",
+                "grams": 75
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Bruinebonensalade met ei",
+            "items": [
+              {
+                "food": "Bruine bonen (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Ei (gekookt)",
+                "grams": 100
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              },
+              {
+                "food": "Ui",
+                "grams": 30
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              },
+              {
+                "food": "Volkorenbrood",
+                "grams": 70
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Wraps met gehakt",
+            "items": [
+              {
+                "food": "Volkoren wrap",
+                "grams": 120
+              },
+              {
+                "food": "Rundergehakt 5% (gebakken)",
+                "grams": 100
+              },
+              {
+                "food": "IJsbergsla",
+                "grams": 50
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              },
+              {
+                "food": "Magere yoghurt",
+                "grams": 50
+              }
+            ]
+          },
+          {
+            "name": "Roggebrood met sardines",
+            "items": [
+              {
+                "food": "Roggebrood",
+                "grams": 150
+              },
+              {
+                "food": "Sardines (blik)",
+                "grams": 80
+              },
+              {
+                "food": "Hüttenkäse",
+                "grams": 100
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Kwark met muesli en rijstwafels",
+            "items": [
+              {
+                "food": "Magere kwark",
+                "grams": 300
+              },
+              {
+                "food": "Muesli zonder suiker",
+                "grams": 50
+              },
+              {
+                "food": "Appel",
+                "grams": 150
+              },
+              {
+                "food": "Rijstwafel",
+                "grams": 20
+              },
+              {
+                "food": "Pindakaas (100% pinda)",
+                "grams": 15
+              }
+            ]
+          },
+          {
+            "name": "Omelet met brood",
+            "items": [
+              {
+                "food": "Ei (gekookt)",
+                "grams": 150
+              },
+              {
+                "food": "Eiwit van ei",
+                "grams": 100
+              },
+              {
+                "food": "Ui",
+                "grams": 50
+              },
+              {
+                "food": "Rode paprika",
+                "grams": 100
+              },
+              {
+                "food": "Volkorenbrood",
+                "grams": 70
+              },
+              {
+                "food": "Kaas 30+",
+                "grams": 20
+              }
+            ]
+          },
+          {
+            "name": "Witte bonen op toast",
+            "items": [
+              {
+                "food": "Witte bonen in tomatensaus",
+                "grams": 200
+              },
+              {
+                "food": "Volkorenbrood",
+                "grams": 105
+              },
+              {
+                "food": "Ei (gekookt)",
+                "grams": 100
+              },
+              {
+                "food": "Kaas 30+",
+                "grams": 20
+              }
+            ]
+          }
+        ],
+        "tussendoor": [
+          {
+            "name": "Kwark met banaan",
+            "items": [
+              {
+                "food": "Magere kwark",
+                "grams": 250
+              },
+              {
+                "food": "Banaan",
+                "grams": 120
+              },
+              {
+                "food": "Pindakaas (100% pinda)",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Boterham met kaas en melk",
+            "items": [
+              {
+                "food": "Volkorenbrood",
+                "grams": 70
+              },
+              {
+                "food": "Kaas 30+",
+                "grams": 30
+              },
+              {
+                "food": "Halfvolle melk",
+                "grams": 250
+              }
+            ]
+          },
+          {
+            "name": "Eitje met kip en appel",
+            "items": [
+              {
+                "food": "Ei (gekookt)",
+                "grams": 100
+              },
+              {
+                "food": "Kipfilet (beleg)",
+                "grams": 50
+              },
+              {
+                "food": "Appel",
+                "grams": 150
+              }
+            ]
+          },
+          {
+            "name": "Kwark met pinda's",
+            "items": [
+              {
+                "food": "Magere kwark",
+                "grams": 200
+              },
+              {
+                "food": "Pinda's (ongezouten)",
+                "grams": 20
+              },
+              {
+                "food": "Mandarijn",
+                "grams": 150
+              }
+            ]
+          },
+          {
+            "name": "Rijstwafels met hüttenkäse",
+            "items": [
+              {
+                "food": "Rijstwafel",
+                "grams": 30
+              },
+              {
+                "food": "Hüttenkäse",
+                "grams": 150
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Melk met banaan en pinda's",
+            "items": [
+              {
+                "food": "Halfvolle melk",
+                "grams": 400
+              },
+              {
+                "food": "Banaan",
+                "grams": 100
+              },
+              {
+                "food": "Pinda's (ongezouten)",
+                "grams": 15
+              }
+            ]
+          }
+        ],
+        "avond": [
+          {
+            "name": "Kip met rijst en groente",
+            "items": [
+              {
+                "food": "Kipfilet (gebakken)",
+                "grams": 175
+              },
+              {
+                "food": "Witte rijst (gekookt)",
+                "grams": 250
+              },
+              {
+                "food": "Broccoli",
+                "grams": 150
+              },
+              {
+                "food": "Wortel",
+                "grams": 100
+              },
+              {
+                "food": "Sojasaus",
+                "grams": 10
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Boerenkoolstamppot met gehakt",
+            "items": [
+              {
+                "food": "Aardappel (gekookt)",
+                "grams": 300
+              },
+              {
+                "food": "Boerenkool",
+                "grams": 200
+              },
+              {
+                "food": "Rundergehakt 5% (gebakken)",
+                "grams": 150
+              },
+              {
+                "food": "Halvarine (verrijkt)",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Spaghetti bolognese",
+            "items": [
+              {
+                "food": "Witte pasta (gekookt)",
+                "grams": 220
+              },
+              {
+                "food": "Rundergehakt 5% (gebakken)",
+                "grams": 150
+              },
+              {
+                "food": "Tomaat",
+                "grams": 200
+              },
+              {
+                "food": "Ui",
+                "grams": 75
+              },
+              {
+                "food": "Wortel",
+                "grams": 100
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Aardappels, kipdij en sperziebonen",
+            "items": [
+              {
+                "food": "Aardappel (gekookt)",
+                "grams": 300
+              },
+              {
+                "food": "Kipdij (gebakken)",
+                "grams": 175
+              },
+              {
+                "food": "Sperziebonen",
+                "grams": 250
+              },
+              {
+                "food": "Halvarine (verrijkt)",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Nasi met kip en ei",
+            "items": [
+              {
+                "food": "Witte rijst (gekookt)",
+                "grams": 250
+              },
+              {
+                "food": "Kipfilet (gebakken)",
+                "grams": 150
+              },
+              {
+                "food": "Ui",
+                "grams": 75
+              },
+              {
+                "food": "Wortel",
+                "grams": 100
+              },
+              {
+                "food": "Taugé",
+                "grams": 100
+              },
+              {
+                "food": "Ei (gekookt)",
+                "grams": 50
+              },
+              {
+                "food": "Sojasaus",
+                "grams": 15
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Chili con carne",
+            "items": [
+              {
+                "food": "Kidneybonen (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Rundergehakt 5% (gebakken)",
+                "grams": 125
+              },
+              {
+                "food": "Tomaat",
+                "grams": 200
+              },
+              {
+                "food": "Ui",
+                "grams": 75
+              },
+              {
+                "food": "Rode paprika",
+                "grams": 100
+              },
+              {
+                "food": "Witte rijst (gekookt)",
+                "grams": 150
+              }
+            ]
+          },
+          {
+            "name": "Zuurkoolstamppot met gehakt",
+            "items": [
+              {
+                "food": "Aardappel (gekookt)",
+                "grams": 300
+              },
+              {
+                "food": "Zuurkool",
+                "grams": 200
+              },
+              {
+                "food": "Rundergehakt 5% (gebakken)",
+                "grams": 150
+              },
+              {
+                "food": "Halvarine (verrijkt)",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Macaroni met kip",
+            "items": [
+              {
+                "food": "Witte pasta (gekookt)",
+                "grams": 220
+              },
+              {
+                "food": "Kipfilet (gebakken)",
+                "grams": 150
+              },
+              {
+                "food": "Tomaat",
+                "grams": 200
+              },
+              {
+                "food": "Courgette",
+                "grams": 150
+              },
+              {
+                "food": "Ui",
+                "grams": 50
+              },
+              {
+                "food": "Kaas 30+",
+                "grams": 20
+              }
+            ]
+          },
+          {
+            "name": "Witvis met spinazie en aardappels",
+            "items": [
+              {
+                "food": "Tilapia (gegaard)",
+                "grams": 200
+              },
+              {
+                "food": "Aardappel (gekookt)",
+                "grams": 300
+              },
+              {
+                "food": "Spinazie",
+                "grams": 200
+              },
+              {
+                "food": "Halvarine (verrijkt)",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Hutspot met gehakt",
+            "items": [
+              {
+                "food": "Aardappel (gekookt)",
+                "grams": 250
+              },
+              {
+                "food": "Wortel",
+                "grams": 250
+              },
+              {
+                "food": "Ui",
+                "grams": 100
+              },
+              {
+                "food": "Rundergehakt 5% (gebakken)",
+                "grams": 150
+              },
+              {
+                "food": "Halvarine (verrijkt)",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Bruine bonen met rijst en kip",
+            "items": [
+              {
+                "food": "Bruine bonen (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Kipdij (gebakken)",
+                "grams": 125
+              },
+              {
+                "food": "Witte rijst (gekookt)",
+                "grams": 150
+              },
+              {
+                "food": "Ui",
+                "grams": 50
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Ovenschotel kip en broccoli",
+            "items": [
+              {
+                "food": "Aardappel (gekookt)",
+                "grams": 300
+              },
+              {
+                "food": "Kipfilet (gebakken)",
+                "grams": 175
+              },
+              {
+                "food": "Broccoli",
+                "grams": 250
+              },
+              {
+                "food": "Kaas 30+",
+                "grams": 20
+              }
+            ]
+          },
+          {
+            "name": "Pasta met tonijn",
+            "items": [
+              {
+                "food": "Witte pasta (gekookt)",
+                "grams": 220
+              },
+              {
+                "food": "Tonijn in water (blik)",
+                "grams": 150
+              },
+              {
+                "food": "Tomaat",
+                "grams": 200
+              },
+              {
+                "food": "Ui",
+                "grams": 50
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Boerenomelet met aardappels",
+            "items": [
+              {
+                "food": "Ei (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Eiwit van ei",
+                "grams": 100
+              },
+              {
+                "food": "Aardappel (gekookt)",
+                "grams": 300
+              },
+              {
+                "food": "IJsbergsla",
+                "grams": 100
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          }
+        ],
+        "avondsnack": [
+          {
+            "name": "Kwark met appel",
+            "items": [
+              {
+                "food": "Magere kwark",
+                "grams": 250
+              },
+              {
+                "food": "Appel",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Hüttenkäse met komkommer",
+            "items": [
+              {
+                "food": "Hüttenkäse",
+                "grams": 200
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Yoghurt met kwark",
+            "items": [
+              {
+                "food": "Magere yoghurt",
+                "grams": 200
+              },
+              {
+                "food": "Magere kwark",
+                "grams": 150
+              },
+              {
+                "food": "Blauwe bessen",
+                "grams": 50
+              }
+            ]
+          },
+          {
+            "name": "Eitje met kipfilet",
+            "items": [
+              {
+                "food": "Ei (gekookt)",
+                "grams": 100
+              },
+              {
+                "food": "Kipfilet (beleg)",
+                "grams": 50
+              }
+            ]
+          },
+          {
+            "name": "Kwark met havermout",
+            "items": [
+              {
+                "food": "Magere kwark",
+                "grams": 250
+              },
+              {
+                "food": "Havermout",
+                "grams": 20
+              }
+            ]
+          },
+          {
+            "name": "Boterham met hüttenkäse",
+            "items": [
+              {
+                "food": "Volkorenbrood",
+                "grams": 35
+              },
+              {
+                "food": "Hüttenkäse",
+                "grams": 150
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "variatie": {
+      "name": "Gevarieerd",
+      "meals": {
+        "ontbijt": [
+          {
+            "name": "Kwark-bowl",
+            "items": [
+              {
+                "food": "Magere kwark",
+                "grams": 300
+              },
+              {
+                "food": "Havermout",
+                "grams": 60
+              },
+              {
+                "food": "Blauwe bessen",
+                "grams": 100
+              },
+              {
+                "food": "Walnoten",
+                "grams": 15
+              },
+              {
+                "food": "Chiazaad",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Eieren op brood",
+            "items": [
+              {
+                "food": "Ei (gekookt)",
+                "grams": 150
+              },
+              {
+                "food": "Eiwit van ei",
+                "grams": 100
+              },
+              {
+                "food": "Volkorenbrood",
+                "grams": 105
+              },
+              {
+                "food": "Spinazie",
+                "grams": 50
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              },
+              {
+                "food": "Halvarine (verrijkt)",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Proteïne-havermout",
+            "items": [
+              {
+                "food": "Havermout",
+                "grams": 70
+              },
+              {
+                "food": "Halfvolle melk",
+                "grams": 250
+              },
+              {
+                "food": "Whey-eiwitpoeder",
+                "grams": 30
+              },
+              {
+                "food": "Banaan",
+                "grams": 100
+              },
+              {
+                "food": "Pindakaas (100% pinda)",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Skyr met muesli",
+            "items": [
+              {
+                "food": "Skyr naturel",
+                "grams": 300
+              },
+              {
+                "food": "Muesli zonder suiker",
+                "grams": 60
+              },
+              {
+                "food": "Frambozen",
+                "grams": 100
+              },
+              {
+                "food": "Amandelen",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Groente-omelet",
+            "items": [
+              {
+                "food": "Ei (gekookt)",
+                "grams": 150
+              },
+              {
+                "food": "Eiwit van ei",
+                "grams": 150
+              },
+              {
+                "food": "Champignons",
+                "grams": 100
+              },
+              {
+                "food": "Rode paprika",
+                "grams": 100
+              },
+              {
+                "food": "Spinazie",
+                "grams": 50
+              },
+              {
+                "food": "Roggebrood",
+                "grams": 100
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Yoghurt met granola",
+            "items": [
+              {
+                "food": "Griekse yoghurt 0%",
+                "grams": 300
+              },
+              {
+                "food": "Granola",
+                "grams": 50
+              },
+              {
+                "food": "Aardbeien",
+                "grams": 150
+              },
+              {
+                "food": "Lijnzaad",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Hüttenkäse-toast",
+            "items": [
+              {
+                "food": "Volkorenbrood",
+                "grams": 105
+              },
+              {
+                "food": "Hüttenkäse",
+                "grams": 200
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              },
+              {
+                "food": "Rookvlees (beleg)",
+                "grams": 50
+              },
+              {
+                "food": "Kiwi",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Eiwitpancakes",
+            "items": [
+              {
+                "food": "Havermout",
+                "grams": 60
+              },
+              {
+                "food": "Ei (gekookt)",
+                "grams": 100
+              },
+              {
+                "food": "Eiwit van ei",
+                "grams": 100
+              },
+              {
+                "food": "Whey-eiwitpoeder",
+                "grams": 20
+              },
+              {
+                "food": "Banaan",
+                "grams": 100
+              },
+              {
+                "food": "Blauwe bessen",
+                "grams": 75
+              }
+            ]
+          },
+          {
+            "name": "Kefir-smoothiebowl",
+            "items": [
+              {
+                "food": "Kefir (mager)",
+                "grams": 300
+              },
+              {
+                "food": "Whey-eiwitpoeder",
+                "grams": 30
+              },
+              {
+                "food": "Frambozen",
+                "grams": 100
+              },
+              {
+                "food": "Banaan",
+                "grams": 100
+              },
+              {
+                "food": "Havermout",
+                "grams": 40
+              },
+              {
+                "food": "Pompoenpitten",
+                "grams": 10
+              }
+            ]
+          }
+        ],
+        "lunch": [
+          {
+            "name": "Kipwraps",
+            "items": [
+              {
+                "food": "Volkoren wrap",
+                "grams": 120
+              },
+              {
+                "food": "Kipfilet (gebakken)",
+                "grams": 120
+              },
+              {
+                "food": "Hummus",
+                "grams": 40
+              },
+              {
+                "food": "Rucola",
+                "grams": 30
+              },
+              {
+                "food": "Rode paprika",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Tonijn-quinoabowl",
+            "items": [
+              {
+                "food": "Quinoa (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Tonijn in water (blik)",
+                "grams": 120
+              },
+              {
+                "food": "Edamame",
+                "grams": 80
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              },
+              {
+                "food": "Avocado",
+                "grams": 50
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Roggebrood met beleg",
+            "items": [
+              {
+                "food": "Roggebrood",
+                "grams": 150
+              },
+              {
+                "food": "Kipfilet (beleg)",
+                "grams": 75
+              },
+              {
+                "food": "Hüttenkäse",
+                "grams": 150
+              },
+              {
+                "food": "Rookvlees (beleg)",
+                "grams": 50
+              },
+              {
+                "food": "Tomaat",
+                "grams": 150
+              },
+              {
+                "food": "Appel",
+                "grams": 150
+              }
+            ]
+          },
+          {
+            "name": "Linzensalade met kip en feta",
+            "items": [
+              {
+                "food": "Linzen (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Kipfilet (gebakken)",
+                "grams": 100
+              },
+              {
+                "food": "Feta",
+                "grams": 40
+              },
+              {
+                "food": "Rode paprika",
+                "grams": 100
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              },
+              {
+                "food": "Rucola",
+                "grams": 30
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Roggebrood met gerookte zalm",
+            "items": [
+              {
+                "food": "Roggebrood",
+                "grams": 150
+              },
+              {
+                "food": "Gerookte zalm",
+                "grams": 100
+              },
+              {
+                "food": "Hüttenkäse",
+                "grams": 100
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              },
+              {
+                "food": "Waterkers",
+                "grams": 20
+              },
+              {
+                "food": "Appel",
+                "grams": 150
+              }
+            ]
+          },
+          {
+            "name": "Couscous met kip",
+            "items": [
+              {
+                "food": "Couscous (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Kipfilet (gebakken)",
+                "grams": 130
+              },
+              {
+                "food": "Kikkererwten (gekookt)",
+                "grams": 80
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Eiersalade-wrap",
+            "items": [
+              {
+                "food": "Volkoren wrap",
+                "grams": 120
+              },
+              {
+                "food": "Ei (gekookt)",
+                "grams": 100
+              },
+              {
+                "food": "Eiwit van ei",
+                "grams": 100
+              },
+              {
+                "food": "Griekse yoghurt 0%",
+                "grams": 50
+              },
+              {
+                "food": "Kipfilet (beleg)",
+                "grams": 50
+              },
+              {
+                "food": "IJsbergsla",
+                "grams": 50
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Garnalen met rijst en paksoi",
+            "items": [
+              {
+                "food": "Garnalen (gekookt)",
+                "grams": 150
+              },
+              {
+                "food": "Witte rijst (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Paksoi",
+                "grams": 150
+              },
+              {
+                "food": "Taugé",
+                "grams": 100
+              },
+              {
+                "food": "Edamame",
+                "grams": 50
+              },
+              {
+                "food": "Sojasaus",
+                "grams": 15
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Chili con carne",
+            "items": [
+              {
+                "food": "Kidneybonen (gekookt)",
+                "grams": 150
+              },
+              {
+                "food": "Rundergehakt 5% (gebakken)",
+                "grams": 100
+              },
+              {
+                "food": "Tomaat",
+                "grams": 150
+              },
+              {
+                "food": "Ui",
+                "grams": 50
+              },
+              {
+                "food": "Rode paprika",
+                "grams": 100
+              },
+              {
+                "food": "Zilvervliesrijst (gekookt)",
+                "grams": 150
+              }
+            ]
+          },
+          {
+            "name": "Bulgursalade met kalkoen",
+            "items": [
+              {
+                "food": "Bulgur (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Kalkoenfilet (gebakken)",
+                "grams": 130
+              },
+              {
+                "food": "Granaatappel",
+                "grams": 50
+              },
+              {
+                "food": "Rucola",
+                "grams": 30
+              },
+              {
+                "food": "Feta",
+                "grams": 30
+              },
+              {
+                "food": "Avocado",
+                "grams": 50
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Tofu-pokébowl",
+            "items": [
+              {
+                "food": "Zilvervliesrijst (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Tofu naturel",
+                "grams": 200
+              },
+              {
+                "food": "Edamame",
+                "grams": 80
+              },
+              {
+                "food": "Wortel",
+                "grams": 75
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              },
+              {
+                "food": "Mango",
+                "grams": 75
+              },
+              {
+                "food": "Sojasaus",
+                "grams": 15
+              }
+            ]
+          },
+          {
+            "name": "Hummusbord",
+            "items": [
+              {
+                "food": "Volkorenbrood",
+                "grams": 105
+              },
+              {
+                "food": "Hummus",
+                "grams": 60
+              },
+              {
+                "food": "Kipfilet (beleg)",
+                "grams": 100
+              },
+              {
+                "food": "Ei (gekookt)",
+                "grams": 50
+              },
+              {
+                "food": "Wortel",
+                "grams": 100
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              }
+            ]
+          }
+        ],
+        "tussendoor": [
+          {
+            "name": "Skyr met fruit",
+            "items": [
+              {
+                "food": "Skyr naturel",
+                "grams": 250
+              },
+              {
+                "food": "Aardbeien",
+                "grams": 150
+              },
+              {
+                "food": "Amandelen",
+                "grams": 20
+              }
+            ]
+          },
+          {
+            "name": "Eiwitshake",
+            "items": [
+              {
+                "food": "Whey-eiwitpoeder",
+                "grams": 30
+              },
+              {
+                "food": "Halfvolle melk",
+                "grams": 300
+              },
+              {
+                "food": "Appel",
+                "grams": 150
+              }
+            ]
+          },
+          {
+            "name": "Reep en banaan",
+            "items": [
+              {
+                "food": "Proteïnereep",
+                "grams": 60
+              },
+              {
+                "food": "Banaan",
+                "grams": 120
+              }
+            ]
+          },
+          {
+            "name": "Rijstwafels met kwark",
+            "items": [
+              {
+                "food": "Rijstwafel",
+                "grams": 30
+              },
+              {
+                "food": "Pindakaas (100% pinda)",
+                "grams": 15
+              },
+              {
+                "food": "Magere kwark",
+                "grams": 200
+              },
+              {
+                "food": "Blauwe bessen",
+                "grams": 50
+              }
+            ]
+          },
+          {
+            "name": "Edamame met kaas",
+            "items": [
+              {
+                "food": "Edamame",
+                "grams": 150
+              },
+              {
+                "food": "Kaas 30+",
+                "grams": 20
+              },
+              {
+                "food": "Mandarijn",
+                "grams": 150
+              }
+            ]
+          },
+          {
+            "name": "Hüttenkäse met ananas",
+            "items": [
+              {
+                "food": "Hüttenkäse",
+                "grams": 200
+              },
+              {
+                "food": "Ananas",
+                "grams": 150
+              },
+              {
+                "food": "Walnoten",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Ei met wortel en hummus",
+            "items": [
+              {
+                "food": "Ei (gekookt)",
+                "grams": 100
+              },
+              {
+                "food": "Kipfilet (beleg)",
+                "grams": 50
+              },
+              {
+                "food": "Wortel",
+                "grams": 150
+              },
+              {
+                "food": "Hummus",
+                "grams": 30
+              }
+            ]
+          },
+          {
+            "name": "Yoghurt met hazelnoten",
+            "items": [
+              {
+                "food": "Griekse yoghurt 0%",
+                "grams": 250
+              },
+              {
+                "food": "Hazelnoten",
+                "grams": 15
+              },
+              {
+                "food": "Peer",
+                "grams": 150
+              }
+            ]
+          },
+          {
+            "name": "Broodje kip",
+            "items": [
+              {
+                "food": "Volkorenbrood",
+                "grams": 70
+              },
+              {
+                "food": "Kipfilet (beleg)",
+                "grams": 75
+              },
+              {
+                "food": "Komkommer",
+                "grams": 75
+              },
+              {
+                "food": "Appel",
+                "grams": 100
+              }
+            ]
+          }
+        ],
+        "avond": [
+          {
+            "name": "Kip, rijst en groente",
+            "items": [
+              {
+                "food": "Kipfilet (gebakken)",
+                "grams": 200
+              },
+              {
+                "food": "Zilvervliesrijst (gekookt)",
+                "grams": 250
+              },
+              {
+                "food": "Rode paprika",
+                "grams": 100
+              },
+              {
+                "food": "Broccoli",
+                "grams": 150
+              },
+              {
+                "food": "Sojasaus",
+                "grams": 15
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Zalm met zoete aardappel",
+            "items": [
+              {
+                "food": "Zalm (gegaard)",
+                "grams": 150
+              },
+              {
+                "food": "Zoete aardappel",
+                "grams": 300
+              },
+              {
+                "food": "Broccoli",
+                "grams": 250
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Magere bolognese",
+            "items": [
+              {
+                "food": "Rundergehakt 5% (gebakken)",
+                "grams": 150
+              },
+              {
+                "food": "Volkorenpasta (gekookt)",
+                "grams": 220
+              },
+              {
+                "food": "Tomaat",
+                "grams": 200
+              },
+              {
+                "food": "Courgette",
+                "grams": 150
+              },
+              {
+                "food": "Ui",
+                "grams": 75
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              },
+              {
+                "food": "Parmezaanse kaas",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Biefstuk met aardappel",
+            "items": [
+              {
+                "food": "Biefstuk (gebakken)",
+                "grams": 175
+              },
+              {
+                "food": "Aardappel (gekookt)",
+                "grams": 300
+              },
+              {
+                "food": "Sperziebonen",
+                "grams": 250
+              },
+              {
+                "food": "Roomboter",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Kabeljauw met quinoa",
+            "items": [
+              {
+                "food": "Kabeljauw (gegaard)",
+                "grams": 200
+              },
+              {
+                "food": "Quinoa (gekookt)",
+                "grams": 250
+              },
+              {
+                "food": "Spinazie",
+                "grams": 200
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Kalkoenwok",
+            "items": [
+              {
+                "food": "Kalkoenfilet (gebakken)",
+                "grams": 200
+              },
+              {
+                "food": "Witte rijst (gekookt)",
+                "grams": 250
+              },
+              {
+                "food": "Paksoi",
+                "grams": 150
+              },
+              {
+                "food": "Rode paprika",
+                "grams": 100
+              },
+              {
+                "food": "Taugé",
+                "grams": 100
+              },
+              {
+                "food": "Sojasaus",
+                "grams": 15
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Linzencurry met kip",
+            "items": [
+              {
+                "food": "Linzen (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Kipdij (gebakken)",
+                "grams": 150
+              },
+              {
+                "food": "Bloemkool",
+                "grams": 200
+              },
+              {
+                "food": "Tomaat",
+                "grams": 150
+              },
+              {
+                "food": "Ui",
+                "grams": 75
+              },
+              {
+                "food": "Zilvervliesrijst (gekookt)",
+                "grams": 150
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Varkenshaas met spruitjes",
+            "items": [
+              {
+                "food": "Varkenshaas (gebakken)",
+                "grams": 175
+              },
+              {
+                "food": "Zoete aardappel",
+                "grams": 300
+              },
+              {
+                "food": "Spruitjes",
+                "grams": 200
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Pasta met tonijn",
+            "items": [
+              {
+                "food": "Volkorenpasta (gekookt)",
+                "grams": 220
+              },
+              {
+                "food": "Tonijn in water (blik)",
+                "grams": 150
+              },
+              {
+                "food": "Tomaat",
+                "grams": 200
+              },
+              {
+                "food": "Courgette",
+                "grams": 150
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 10
+              },
+              {
+                "food": "Parmezaanse kaas",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Makreel met bietjes",
+            "items": [
+              {
+                "food": "Makreel",
+                "grams": 125
+              },
+              {
+                "food": "Aardappel (gekookt)",
+                "grams": 300
+              },
+              {
+                "food": "Rode biet",
+                "grams": 150
+              },
+              {
+                "food": "Ei (gekookt)",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Kip-shoarmabowl",
+            "items": [
+              {
+                "food": "Kipdij (gebakken)",
+                "grams": 175
+              },
+              {
+                "food": "Bulgur (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Hummus",
+                "grams": 40
+              },
+              {
+                "food": "Komkommer",
+                "grams": 100
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              },
+              {
+                "food": "Rode kool",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Andijviestamppot met gehakt",
+            "items": [
+              {
+                "food": "Rundergehakt 5% (gebakken)",
+                "grams": 175
+              },
+              {
+                "food": "Aardappel (gekookt)",
+                "grams": 300
+              },
+              {
+                "food": "Andijvie",
+                "grams": 200
+              },
+              {
+                "food": "Halvarine (verrijkt)",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Garnalencurry",
+            "items": [
+              {
+                "food": "Garnalen (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Witte rijst (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Doperwten",
+                "grams": 100
+              },
+              {
+                "food": "Bloemkool",
+                "grams": 150
+              },
+              {
+                "food": "Tomaat",
+                "grams": 150
+              },
+              {
+                "food": "Ui",
+                "grams": 50
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Tofu-roerbak",
+            "items": [
+              {
+                "food": "Tofu naturel",
+                "grams": 250
+              },
+              {
+                "food": "Zilvervliesrijst (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Broccoli",
+                "grams": 150
+              },
+              {
+                "food": "Rode paprika",
+                "grams": 100
+              },
+              {
+                "food": "Edamame",
+                "grams": 80
+              },
+              {
+                "food": "Sojasaus",
+                "grams": 15
+              }
+            ]
+          },
+          {
+            "name": "Burritobowl",
+            "items": [
+              {
+                "food": "Rundergehakt 5% (gebakken)",
+                "grams": 150
+              },
+              {
+                "food": "Zwarte bonen (gekookt)",
+                "grams": 150
+              },
+              {
+                "food": "Zilvervliesrijst (gekookt)",
+                "grams": 150
+              },
+              {
+                "food": "Rode paprika",
+                "grams": 100
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              },
+              {
+                "food": "Avocado",
+                "grams": 50
+              },
+              {
+                "food": "Magere yoghurt",
+                "grams": 50
+              }
+            ]
+          },
+          {
+            "name": "Zalm met couscous en asperges",
+            "items": [
+              {
+                "food": "Zalm (gegaard)",
+                "grams": 150
+              },
+              {
+                "food": "Couscous (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Asperges",
+                "grams": 200
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Kipsaté met boekweit",
+            "items": [
+              {
+                "food": "Kipfilet (gebakken)",
+                "grams": 200
+              },
+              {
+                "food": "Pindakaas (100% pinda)",
+                "grams": 20
+              },
+              {
+                "food": "Sojasaus",
+                "grams": 10
+              },
+              {
+                "food": "Boekweit (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Sperziebonen",
+                "grams": 200
+              }
+            ]
+          },
+          {
+            "name": "Kabeljauw met pompoenpuree",
+            "items": [
+              {
+                "food": "Kabeljauw (gegaard)",
+                "grams": 200
+              },
+              {
+                "food": "Pompoen",
+                "grams": 300
+              },
+              {
+                "food": "Aardappel (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Spinazie",
+                "grams": 150
+              },
+              {
+                "food": "Roomboter",
+                "grams": 10
+              }
+            ]
+          },
+          {
+            "name": "Tempeh-bowl",
+            "items": [
+              {
+                "food": "Tempeh",
+                "grams": 150
+              },
+              {
+                "food": "Quinoa (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Boerenkool",
+                "grams": 150
+              },
+              {
+                "food": "Wortel",
+                "grams": 100
+              },
+              {
+                "food": "Pompoenpitten",
+                "grams": 15
+              },
+              {
+                "food": "Olijfolie",
+                "grams": 5
+              }
+            ]
+          },
+          {
+            "name": "Seitanwraps",
+            "items": [
+              {
+                "food": "Seitan",
+                "grams": 150
+              },
+              {
+                "food": "Volkoren wrap",
+                "grams": 120
+              },
+              {
+                "food": "Rode kool",
+                "grams": 100
+              },
+              {
+                "food": "Hummus",
+                "grams": 40
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Kalkoenpasta met spinazie",
+            "items": [
+              {
+                "food": "Kalkoenfilet (gebakken)",
+                "grams": 175
+              },
+              {
+                "food": "Witte pasta (gekookt)",
+                "grams": 200
+              },
+              {
+                "food": "Spinazie",
+                "grams": 200
+              },
+              {
+                "food": "Champignons",
+                "grams": 150
+              },
+              {
+                "food": "Mozzarella light",
+                "grams": 50
+              }
+            ]
+          }
+        ],
+        "avondsnack": [
+          {
+            "name": "Kwark met frambozen",
+            "items": [
+              {
+                "food": "Magere kwark",
+                "grams": 250
+              },
+              {
+                "food": "Frambozen",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Caseïne en chocolade",
+            "items": [
+              {
+                "food": "Caseïne-eiwitpoeder",
+                "grams": 30
+              },
+              {
+                "food": "Pure chocolade 85%",
+                "grams": 15
+              }
+            ]
+          },
+          {
+            "name": "Hüttenkäse met tomaat",
+            "items": [
+              {
+                "food": "Hüttenkäse",
+                "grams": 200
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Skyr met lijnzaad",
+            "items": [
+              {
+                "food": "Skyr naturel",
+                "grams": 200
+              },
+              {
+                "food": "Lijnzaad",
+                "grams": 10
+              },
+              {
+                "food": "Blauwe bessen",
+                "grams": 75
+              }
+            ]
+          },
+          {
+            "name": "Yoghurt met chocolade",
+            "items": [
+              {
+                "food": "Griekse yoghurt 0%",
+                "grams": 250
+              },
+              {
+                "food": "Pure chocolade 85%",
+                "grams": 10
+              },
+              {
+                "food": "Aardbeien",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Kwark met walnoten",
+            "items": [
+              {
+                "food": "Magere kwark",
+                "grams": 250
+              },
+              {
+                "food": "Walnoten",
+                "grams": 10
+              },
+              {
+                "food": "Peer",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Caseïneshake",
+            "items": [
+              {
+                "food": "Caseïne-eiwitpoeder",
+                "grams": 30
+              },
+              {
+                "food": "Halfvolle melk",
+                "grams": 200
+              }
+            ]
+          },
+          {
+            "name": "Eitjes met tomaat",
+            "items": [
+              {
+                "food": "Ei (gekookt)",
+                "grams": 100
+              },
+              {
+                "food": "Eiwit van ei",
+                "grams": 100
+              },
+              {
+                "food": "Tomaat",
+                "grams": 100
+              }
+            ]
+          },
+          {
+            "name": "Kefir met eiwit",
+            "items": [
+              {
+                "food": "Kefir (mager)",
+                "grams": 300
+              },
+              {
+                "food": "Whey-eiwitpoeder",
+                "grams": 15
+              },
+              {
+                "food": "Amandelen",
+                "grams": 15
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
