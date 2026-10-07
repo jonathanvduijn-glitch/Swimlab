@@ -115,16 +115,19 @@ struct ShoppingList: Sendable {
 
         let checkout = rows.reduce(0) { $0 + $1.cost }
         let eaten = rows.reduce(0) { $0 + $1.usedCost }
-        let estimates = data.stores.stores.enumerated()
-            .filter { selectedStores.contains($0.element.name) }
-            .map { offset, store in
-                let factor = 1 + store.index / 100
-                return (offset, StoreEstimate(
-                    name: store.name, index: store.index, checkoutTotal: checkout * factor, eatenTotal: eaten * factor))
-            }
-            // Stable: equal totals keep the stores.json order, like the prototype's Array.sort.
-            .sorted { $0.1.checkoutTotal != $1.1.checkoutTotal ? $0.1.checkoutTotal < $1.1.checkoutTotal : $0.0 < $1.0 }
-            .map { $0.1 }
+        var unsorted: [StoreEstimate] = []
+        for store in data.stores.stores where selectedStores.contains(store.name) {
+            let factor = 1 + store.index / 100
+            unsorted.append(StoreEstimate(
+                name: store.name, index: store.index, checkoutTotal: checkout * factor, eatenTotal: eaten * factor))
+        }
+        // Stable: equal totals keep the stores.json order, like the prototype's Array.sort.
+        let order = unsorted.indices.sorted { a, b in
+            let lhs = unsorted[a].checkoutTotal
+            let rhs = unsorted[b].checkoutTotal
+            return lhs != rhs ? lhs < rhs : a < b
+        }
+        let estimates = order.map { unsorted[$0] }
 
         let dutch = Locale(identifier: "nl_NL")
         let sections = data.packs.aisles.compactMap { aisle -> (aisle: String, rows: [ShoppingRow])? in
