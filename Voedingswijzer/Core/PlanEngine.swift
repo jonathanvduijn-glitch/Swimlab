@@ -242,7 +242,12 @@ struct PlanEngine: Sendable {
     func rawKcal(weekday: Int, slots: [MealSlot] = MealSlot.allCases) -> Double {
         // Summed item by item in plan order, exactly like the prototype, so factors match to the last bit.
         let items = slots.flatMap { chosenMeal($0, weekday: weekday)?.items ?? [] }
-        return items.reduce(0) { sum, item in sum + (data.food(named: item.food)?.kcal ?? 0) * item.grams / 100 }
+        var kcal = 0.0
+        for item in items {
+            let per100g: Double = data.food(named: item.food)?.kcal ?? 0
+            kcal += per100g * item.grams / 100
+        }
+        return kcal
     }
 
     /// The base day factor for `weekday`.

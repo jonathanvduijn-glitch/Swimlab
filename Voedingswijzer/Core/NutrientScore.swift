@@ -26,7 +26,7 @@ enum NutrientScore {
     /// Score 0–100: the ratio of each of the 12 scored nutrients, capped at 3, divided by 3, averaged.
     static func score(_ food: Nutrients, targets: Targets) -> Int {
         guard food.kcal != 0 else { return 0 }
-        let sum = Nutrient.scored.reduce(0) { $0 + min(ratio($1, in: food, targets: targets), 3) / 3 }
+        let sum = Nutrient.scored.reduce(0.0) { $0 + min(ratio($1, in: food, targets: targets), 3) / 3 }
         return Int(jsRound(sum / Double(Nutrient.scored.count) * 100))
     }
 
