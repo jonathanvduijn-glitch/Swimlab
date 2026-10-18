@@ -18,6 +18,8 @@ final class Wine {
     var drinkFrom: Int? = nil
     var drinkBy: Int? = nil
     var pairings: [String] = []
+    // Geuren en smaken die je in de wijn terugvindt, bijv. "kers", "vanille".
+    var aromas: [String] = []
     var notes: String = ""
     var rating: Int = 0
     @Attribute(.externalStorage) var labelImage: Data? = nil
@@ -42,6 +44,7 @@ final class Wine {
         drinkFrom: Int? = nil,
         drinkBy: Int? = nil,
         pairings: [String] = [],
+        aromas: [String] = [],
         notes: String = "",
         rating: Int = 0
     ) {
@@ -57,6 +60,7 @@ final class Wine {
         self.drinkFrom = drinkFrom
         self.drinkBy = drinkBy
         self.pairings = pairings
+        self.aromas = aromas
         self.notes = notes
         self.rating = rating
         self.dateAdded = .now

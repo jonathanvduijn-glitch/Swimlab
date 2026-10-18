@@ -80,7 +80,7 @@ struct WineListView: View {
                 }
             }
         }
-        .searchable(text: $searchText, prompt: "Naam, druif, regio of gerecht")
+        .searchable(text: $searchText, prompt: "Naam, druif, regio, gerecht of smaak")
         .overlay {
             if content.isEmpty && !searchText.isEmpty {
                 ContentUnavailableView.search(text: searchText)
@@ -114,7 +114,7 @@ struct WineListView: View {
         if let location = filter.location, wine.location != location { return false }
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !query.isEmpty else { return true }
-        let fields = [wine.name, wine.producer, wine.grape, wine.region] + wine.pairings
+        let fields = [wine.name, wine.producer, wine.grape, wine.region] + wine.pairings + wine.aromas
         return fields.contains { $0.localizedStandardContains(query) }
     }
 

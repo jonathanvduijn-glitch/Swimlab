@@ -15,10 +15,11 @@ struct LabelScanResult: Decodable {
     var drinkFrom: Int?
     var drinkBy: Int?
     var pairings: [String] = []
+    var aromas: [String] = []
     var notes = ""
 
     private enum CodingKeys: String, CodingKey {
-        case readable, name, producer, vintage, grape, region, country, type, drinkFrom, drinkBy, pairings, notes
+        case readable, name, producer, vintage, grape, region, country, type, drinkFrom, drinkBy, pairings, aromas, notes
     }
 
     init(from decoder: Decoder) throws {
@@ -34,12 +35,19 @@ struct LabelScanResult: Decodable {
         drinkFrom = Self.year(container, .drinkFrom)
         drinkBy = Self.year(container, .drinkBy)
         notes = Self.text(container, .notes)
-        // Gerechten opschonen: geen lege en geen dubbele.
-        let list = (try? container.decodeIfPresent([String].self, forKey: .pairings)) ?? []
-        for dish in list.map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
-        where !dish.isEmpty && !pairings.contains(dish) {
-            pairings.append(dish)
+        pairings = Self.list(container, .pairings)
+        aromas = Self.list(container, .aromas).map { $0.lowercased() }
+    }
+
+    // Lijst opschonen: geen lege en geen dubbele items.
+    private static func list(_ container: KeyedDecodingContainer<CodingKeys>, _ key: CodingKeys) -> [String] {
+        let raw = (try? container.decodeIfPresent([String].self, forKey: key)) ?? []
+        var result: [String] = []
+        for item in raw.map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
+        where !item.isEmpty && !result.contains(item) {
+            result.append(item)
         }
+        return result
     }
 
     // Bruikbaar als Claude het etiket kon lezen en er een naam of producent op stond.
@@ -108,6 +116,7 @@ extension WineDraft {
         drinkFrom = result.drinkFrom
         drinkBy = result.drinkBy
         pairings = result.pairings
+        aromas = result.aromas
         notes = result.notes
     }
 }

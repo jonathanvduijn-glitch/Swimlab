@@ -8,8 +8,12 @@ programmeur: praat Nederlands, in gewone taal. Alle tekst in de app is Nederland
 - Wijnen toevoegen door een foto van het etiket te maken of te kiezen. Claude
   (Anthropic API) leest het etiket en vult het formulier vooraf in; de gebruiker
   controleert alles en bewaart.
-- Of: wijn zoeken op naam ("Zoek op naam" bij +). Claude geeft uit eigen kennis
-  maximaal 5 passende wijnen (geen live internet); een tik vult het formulier.
+- Of: wijn zoeken op naam ("Zoek op naam" bij +). Eerst snel uit Claude's eigen
+  kennis; met de knop "Zoek op internet" zoekt Claude live op het web (server-tool
+  `web_search_20260209`, max. 5 zoekopdrachten, een paar cent per keer). Maximaal 5
+  treffers; een tik vult het formulier.
+- Aroma's: losse geuren/smaken per wijn (`Wine.aromas`), door Claude ingevuld, zelf
+  aan te passen, als labeltjes op het detailscherm en doorzoekbaar in de lijst.
 - Hoofdlijst "Wine Rack", gegroepeerd op drinkstatus (meest urgent bovenaan,
   binnen een groep gesorteerd op "drinken vóór"), aparte sectie "Op" voor wijnen
   met 0 flessen, filter Alles/Koeling/Kast/Kelder, totaal aantal flessen en
@@ -48,7 +52,11 @@ programmeur: praat Nederlands, in gewone taal. Alle tekst in de app is Nederland
 - Het verzoek gebruikt `output_config.format` (JSON-schema) zodat het antwoord altijd
   geldige JSON is, `effort: "low"` en `max_tokens: 16000` (het model denkt standaard
   eerst na en dat telt mee). `stop_reason` "max_tokens" of "refusal" geeft de melding
-  "etiket onleesbaar". Alle foutmeldingen zijn Nederlands; Engelse API-teksten worden
+  "etiket onleesbaar". Zoeken op internet gebruikt geen `output_config.format`
+  (combinatie met web search niet gedocumenteerd): JSON via de prompt, en als dat
+  niet te lezen is een tweede verzoek mét schema dat de tekst omzet. `pause_turn`
+  wordt maximaal 3 keer hervat. Status 400/403 bij internetzoeken = "zoeken op
+  internet staat waarschijnlijk uit in de Claude Console". Alle foutmeldingen zijn Nederlands; Engelse API-teksten worden
   nooit getoond.
 - Foto's: max. 1568 px naar de API, max. 1024 px bewaard (JPEG, externalStorage),
   plus een miniatuur van 160 px (`Wine.thumbnail`) voor de lijst. Verkleinen gebeurt

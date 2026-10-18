@@ -14,6 +14,7 @@ enum PreviewData {
             Wine(name: "Barolo", producer: "Giacomo Conterno", vintage: year - 10, grape: "Nebbiolo",
                  region: "Piemonte", country: "Italië", type: .red, location: .cellar, quantity: 3,
                  drinkFrom: year - 2, drinkBy: year + 8, pairings: ["Stoofvlees", "Truffelrisotto", "Wild"],
+                 aromas: ["roos", "teer", "kers", "drop"],
                  notes: "Roos, teer en kersen; stevige tannines.", rating: 5),
             Wine(name: "Sancerre", producer: "Domaine Vacheron", vintage: year - 3, grape: "Sauvignon Blanc",
                  region: "Loire", country: "Frankrijk", type: .white, location: .fridge, quantity: 2,

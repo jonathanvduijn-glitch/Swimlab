@@ -24,6 +24,11 @@ struct WineDetailView: View {
                     }
                 }
             }
+            if !wine.aromas.isEmpty {
+                Section("Aroma's") {
+                    AromaTags(aromas: wine.aromas)
+                }
+            }
             if !wine.notes.isEmpty {
                 Section("Notities") {
                     Text(wine.notes)
@@ -139,6 +144,25 @@ struct WineDetailView: View {
                                 .foregroundStyle(.secondary)
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+// Aroma's als kleine labeltjes naast elkaar.
+struct AromaTags: View {
+    let aromas: [String]
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 6) {
+                ForEach(aromas, id: \.self) { aroma in
+                    Text(aroma)
+                        .font(.subheadline)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(Color.accentColor.opacity(0.15), in: Capsule())
                 }
             }
         }

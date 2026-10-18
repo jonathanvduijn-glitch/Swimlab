@@ -1,7 +1,7 @@
 import SwiftUI
 
-// Wijn zoeken op naam: Claude geeft de wijnen die het best passen,
-// en een tik op een treffer vult het formulier.
+// Wijn zoeken op naam. Eerst snel in Claude's eigen kennis; staat de wijn er niet bij,
+// dan kan Claude op internet zoeken. Een tik op een treffer vult het formulier.
 struct WineSearchView: View {
     let onSelect: (LabelScanResult) -> Void
 
@@ -9,6 +9,9 @@ struct WineSearchView: View {
     @State private var results: [LabelScanResult] = []
     @State private var isSearching = false
     @State private var errorMessage: String?
+    // De laatst gezochte term en of daarbij al op internet is gezocht.
+    @State private var lastQuery: String?
+    @State private var searchedOnInternet = false
     @FocusState private var fieldFocused: Bool
 
     var body: some View {
@@ -17,30 +20,30 @@ struct WineSearchView: View {
                 TextField("Bijv. Barolo Conterno 2016", text: $query)
                     .focused($fieldFocused)
                     .submitLabel(.search)
-                    .onSubmit { startSearch() }
+                    .onSubmit { startSearch(onInternet: false) }
                     .autocorrectionDisabled()
-                Button { startSearch() } label: {
+                Button { startSearch(onInternet: false) } label: {
                     Label("Zoek", systemImage: "magnifyingglass")
                 }
                 .disabled(trimmedQuery.isEmpty || isSearching)
             } footer: {
-                Text("Claude zoekt in zijn eigen kennis van wijnen. Controleer daarna altijd het formulier.")
+                Text("Claude zoekt eerst in zijn eigen kennis. Niet gevonden? Laat Claude dan op internet zoeken. Controleer daarna altijd het formulier.")
             }
 
             if isSearching {
-                Section {
-                    HStack {
-                        Spacer()
-                        ProgressView("Claude zoekt de wijn…")
-                        Spacer()
+                progressSection
+            } else {
+                if let errorMessage {
+                    Section {
+                        Text(errorMessage).foregroundStyle(.red)
                     }
                 }
-            } else if let errorMessage {
-                Section {
-                    Text(errorMessage).foregroundStyle(.red)
+                if !results.isEmpty {
+                    resultsSection
                 }
-            } else if !results.isEmpty {
-                resultsSection
+                if lastQuery != nil && !searchedOnInternet {
+                    internetSection
+                }
             }
         }
         .navigationTitle("Zoek op naam")
@@ -48,15 +51,37 @@ struct WineSearchView: View {
         .onAppear { fieldFocused = true }
     }
 
+    // Wachten op Claude.
+    private var progressSection: some View {
+        Section {
+            HStack {
+                Spacer()
+                ProgressView(progressText)
+                Spacer()
+            }
+        }
+    }
+
     // De gevonden wijnen; tik om te kiezen.
     private var resultsSection: some View {
-        Section("Gevonden") {
+        Section(resultsTitle) {
             ForEach(Array(results.enumerated()), id: \.offset) { _, wine in
                 Button { onSelect(wine) } label: {
                     resultRow(wine)
                 }
                 .tint(.primary)
             }
+        }
+    }
+
+    // Knop om alsnog op internet te zoeken.
+    private var internetSection: some View {
+        Section {
+            Button { startSearch(onInternet: true) } label: {
+                Label("Niet de goede wijn? Zoek op internet", systemImage: "globe")
+            }
+        } footer: {
+            Text("Zoeken op internet duurt wat langer en kost een paar cent per keer.")
         }
     }
 
@@ -73,6 +98,11 @@ struct WineSearchView: View {
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
+                if !wine.aromas.isEmpty {
+                    Text(wine.aromas.prefix(4).joined(separator: ", "))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
             }
             Spacer()
             Image(systemName: "chevron.right")
@@ -80,25 +110,35 @@ struct WineSearchView: View {
         }
     }
 
+    private var progressText: String {
+        searchedOnInternet ? "Claude zoekt op internet… (dit kan even duren)" : "Claude zoekt de wijn…"
+    }
+
+    private var resultsTitle: String {
+        searchedOnInternet ? "Gevonden op internet" : "Gevonden"
+    }
+
     private var trimmedQuery: String {
         query.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    // Zoekopdracht naar Claude sturen.
-    private func startSearch() {
-        let text = trimmedQuery
+    // Zoekopdracht starten. Op internet zoeken gebeurt met de laatst gezochte term.
+    private func startSearch(onInternet: Bool) {
+        let text = onInternet ? (lastQuery ?? trimmedQuery) : trimmedQuery
         guard !text.isEmpty, !isSearching else { return }
         fieldFocused = false
-        Task { await search(text) }
+        lastQuery = text
+        searchedOnInternet = onInternet
+        Task { await search(text, onInternet: onInternet) }
     }
 
-    private func search(_ text: String) async {
+    private func search(_ text: String, onInternet: Bool) async {
         isSearching = true
         errorMessage = nil
         results = []
         defer { isSearching = false }
         do {
-            results = try await ClaudeService.searchWines(query: text)
+            results = try await ClaudeService.searchWines(query: text, onInternet: onInternet)
         } catch {
             errorMessage = error.localizedDescription
         }

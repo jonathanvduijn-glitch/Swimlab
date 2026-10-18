@@ -15,6 +15,7 @@ struct WineDraft {
     var drinkFrom: Int?
     var drinkBy: Int?
     var pairings: [String] = []
+    var aromas: [String] = []
     var notes = ""
     var rating = 0
     var imageData: Data?
@@ -35,6 +36,7 @@ struct WineDraft {
         drinkFrom = wine.drinkFrom
         drinkBy = wine.drinkBy
         pairings = wine.pairings
+        aromas = wine.aromas
         notes = wine.notes
         rating = wine.rating
         imageData = wine.labelImage
@@ -78,6 +80,7 @@ struct WineDraft {
         wine.drinkFrom = drinkFrom
         wine.drinkBy = drinkBy
         wine.pairings = pairings
+        wine.aromas = aromas
         wine.notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
         wine.rating = min(max(rating, 0), 5)
         // Miniatuur alleen opnieuw maken als de foto veranderd is.

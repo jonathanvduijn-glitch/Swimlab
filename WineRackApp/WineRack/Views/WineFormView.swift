@@ -7,7 +7,6 @@ struct WineFormView: View {
     let onSave: (WineDraft) -> Void
 
     @State private var draft: WineDraft
-    @State private var newPairing = ""
 
     init(title: String, draft: WineDraft, onCancel: @escaping () -> Void, onSave: @escaping (WineDraft) -> Void) {
         self.title = title
@@ -38,7 +37,8 @@ struct WineFormView: View {
                     Text(problem).foregroundStyle(.red)
                 }
             }
-            pairingsSection
+            TextListSection(title: "Past bij", placeholder: "Gerecht toevoegen", items: $draft.pairings)
+            TextListSection(title: "Aroma's", placeholder: "Smaak toevoegen, bijv. kers", items: $draft.aromas)
             Section("Beoordeling") {
                 StarRatingView(rating: $draft.rating)
             }
@@ -89,39 +89,46 @@ struct WineFormView: View {
             }
         }
     }
+}
 
-    // Gerechten toevoegen en (met vegen) verwijderen.
-    private var pairingsSection: some View {
+// Lijst met losse woorden (gerechten of aroma's): toevoegen en met vegen verwijderen.
+struct TextListSection: View {
+    let title: String
+    let placeholder: String
+    @Binding var items: [String]
+    @State private var newItem = ""
+
+    var body: some View {
         Section {
-            ForEach(draft.pairings, id: \.self) { dish in
-                Text(dish)
+            ForEach(items, id: \.self) { item in
+                Text(item)
             }
             .onDelete { offsets in
-                draft.pairings.remove(atOffsets: offsets)
+                items.remove(atOffsets: offsets)
             }
             HStack {
-                TextField("Gerecht toevoegen", text: $newPairing)
-                    .onSubmit { addPairing() }
-                Button("Voeg toe") { addPairing() }
+                TextField(placeholder, text: $newItem)
+                    .onSubmit { addItem() }
+                Button("Voeg toe") { addItem() }
                     .buttonStyle(.borderless)
-                    .disabled(trimmedPairing.isEmpty)
+                    .disabled(trimmed.isEmpty)
             }
         } header: {
-            Text("Past bij")
+            Text(title)
         } footer: {
-            Text("Veeg naar links over een gerecht om het te verwijderen.")
+            Text("Veeg naar links over een regel om die te verwijderen.")
         }
     }
 
-    private var trimmedPairing: String {
-        newPairing.trimmingCharacters(in: .whitespacesAndNewlines)
+    private var trimmed: String {
+        newItem.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private func addPairing() {
-        let dish = trimmedPairing
-        guard !dish.isEmpty, !draft.pairings.contains(dish) else { return }
-        draft.pairings.append(dish)
-        newPairing = ""
+    private func addItem() {
+        let item = trimmed
+        guard !item.isEmpty, !items.contains(item) else { return }
+        items.append(item)
+        newItem = ""
     }
 }
 
