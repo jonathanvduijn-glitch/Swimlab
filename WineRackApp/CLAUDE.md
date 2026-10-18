@@ -34,7 +34,7 @@ programmeur: praat Nederlands, in gewone taal. Alle tekst in de app is Nederland
 - SwiftUI + SwiftData, minimaal iOS 17.0, alleen Apple-frameworks (geen packages).
 - Draait op iPhone, in de simulator en op "My Mac (Designed for iPhone)".
 - Xcode-project met een "synchronized folder" (Xcode 16 of nieuwer): nieuwe
-  bestanden in de map `WineRack/WineRack/` horen automatisch bij de app.
+  bestanden in de map `WineRackApp/WineRack/` horen automatisch bij de app.
 - Swift 5-taalmodus, Default Actor Isolation = nonisolated.
 - SwiftData-regels (voor iCloud-sync later): elke property heeft een
   standaardwaarde, relaties zijn optioneel, enums worden als String opgeslagen
@@ -60,9 +60,9 @@ programmeur: praat Nederlands, in gewone taal. Alle tekst in de app is Nederland
 ## Mapstructuur
 
 ```
-WineRack/
+WineRackApp/
 ├── CLAUDE.md
-├── WineRack.xcodeproj
+├── WineRackApp.xcodeproj    dit bestand openen in Xcode
 └── WineRack/
     ├── WineRackApp.swift        start van de app, SwiftData-container
     ├── Assets.xcassets          app-icoon en accentkleur
@@ -90,6 +90,15 @@ WineRack/
         ├── SettingsView.swift   instellingen
         └── StarRatingView.swift sterren
 ```
+
+## Openen en bouwen
+
+- Het project staat in de repository in de map `WineRackApp/` (eigen naam, zodat het
+  niet botst met een ouder leeg project "WineRack" op de Mac). Openen in Xcode:
+  `WineRackApp/WineRackApp.xcodeproj`. De app heet op het scherm gewoon "Wine Rack".
+- GitHub bouwt de app automatisch bij elke wijziging in `WineRackApp/`
+  (`.github/workflows/winerack-build.yml`, macOS-runner, nieuwste Xcode) en faalt
+  bij waarschuwingen of fouten in de eigen code.
 
 ## Werkwijze
 

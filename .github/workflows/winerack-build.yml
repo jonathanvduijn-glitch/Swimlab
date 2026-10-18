@@ -5,7 +5,7 @@ name: Wine Rack bouwen
 on:
   push:
     paths:
-      - "WineRack/**"
+      - "WineRackApp/**"
       - ".github/workflows/winerack-build.yml"
   workflow_dispatch:
 
@@ -27,7 +27,7 @@ jobs:
         run: |
           set -o pipefail
           xcodebuild \
-            -project WineRack/WineRack.xcodeproj \
+            -project WineRackApp/WineRackApp.xcodeproj \
             -target WineRack \
             -sdk iphonesimulator \
             -configuration Debug \
@@ -36,7 +36,7 @@ jobs:
 
       - name: Waarschuwingen in eigen code controleren
         run: |
-          grep -E "/WineRack/WineRack/.*(warning|error):" build.log | sort -u > problems.txt || true
+          grep -E "/WineRackApp/WineRack/.*(warning|error):" build.log | sort -u > problems.txt || true
           if [ -s problems.txt ]; then
             echo "Gevonden waarschuwingen of fouten:"
             cat problems.txt
