@@ -10,6 +10,7 @@ struct AddWineView: View {
 
     @State private var pickerItem: PhotosPickerItem?
     @State private var showingCamera = false
+    @State private var showingSearch = false
     @State private var isScanning = false
     @State private var photoData: Data?
     @State private var errorMessage: String?
@@ -38,7 +39,7 @@ struct AddWineView: View {
                     .foregroundStyle(.secondary)
                 Text("Scan het etiket")
                     .font(.title2.bold())
-                Text("Maak een foto of kies er een. Claude vult daarna het formulier voor je in.")
+                Text("Maak een foto, kies er een of zoek op naam. Claude vult daarna het formulier voor je in.")
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)
                 if let errorMessage {
@@ -61,6 +62,14 @@ struct AddWineView: View {
         .onChange(of: pickerItem) { _, item in
             Task { await loadPickedPhoto(item) }
         }
+        .navigationDestination(isPresented: $showingSearch) {
+            WineSearchView { result in
+                var found = WineDraft()
+                found.fill(from: result)
+                showingSearch = false
+                draft = found
+            }
+        }
         .fullScreenCover(isPresented: $showingCamera) {
             CameraPicker { image in
                 Task { await scan(image) }
@@ -80,6 +89,11 @@ struct AddWineView: View {
             }
             PhotosPicker(selection: $pickerItem, matching: .images) {
                 Label("Kies foto", systemImage: "photo.on.rectangle")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+            Button { showingSearch = true } label: {
+                Label("Zoek op naam", systemImage: "magnifyingglass")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)

@@ -82,6 +82,19 @@ struct LabelScanResult: Decodable {
     }
 }
 
+// Antwoord bij zoeken op naam: een lijst wijnen.
+struct WineSearchResponse: Decodable {
+    var wines: [LabelScanResult] = []
+
+    static func parse(from text: String) -> WineSearchResponse? {
+        guard let start = text.firstIndex(of: "{"),
+              let end = text.lastIndex(of: "}"),
+              start < end else { return nil }
+        let json = String(text[start...end])
+        return try? JSONDecoder().decode(WineSearchResponse.self, from: Data(json.utf8))
+    }
+}
+
 extension WineDraft {
     // Vult het formulier met wat Claude heeft gelezen.
     mutating func fill(from result: LabelScanResult) {

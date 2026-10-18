@@ -8,6 +8,8 @@ programmeur: praat Nederlands, in gewone taal. Alle tekst in de app is Nederland
 - Wijnen toevoegen door een foto van het etiket te maken of te kiezen. Claude
   (Anthropic API) leest het etiket en vult het formulier vooraf in; de gebruiker
   controleert alles en bewaart.
+- Of: wijn zoeken op naam ("Zoek op naam" bij +). Claude geeft uit eigen kennis
+  maximaal 5 passende wijnen (geen live internet); een tik vult het formulier.
 - Hoofdlijst "Wine Rack", gegroepeerd op drinkstatus (meest urgent bovenaan,
   binnen een groep gesorteerd op "drinken vóór"), aparte sectie "Op" voor wijnen
   met 0 flessen, filter Alles/Koeling/Kast/Kelder, totaal aantal flessen en
@@ -75,7 +77,7 @@ WineRackApp/
     │   ├── WineDraft.swift      tijdelijke kopie voor het formulier
     │   └── PreviewData.swift    voorbeeldwijnen voor #Preview
     ├── Services/
-    │   ├── ClaudeService.swift  etiket laten lezen door Claude
+    │   ├── ClaudeService.swift  etiket lezen en wijnen zoeken via Claude
     │   ├── LabelScanResult.swift  robuust JSON-antwoord inlezen
     │   ├── KeychainService.swift  API-sleutel veilig bewaren
     │   └── ImageResizer.swift   foto's verkleinen
@@ -83,6 +85,7 @@ WineRackApp/
         ├── WineListView.swift   hoofdlijst
         ├── WineRowView.swift    één rij + miniatuur
         ├── AddWineView.swift    foto kiezen/maken en scannen
+        ├── WineSearchView.swift zoeken op naam
         ├── CameraPicker.swift   camera
         ├── WineFormView.swift   formulier (toevoegen en wijzigen)
         ├── WineDetailView.swift detailscherm

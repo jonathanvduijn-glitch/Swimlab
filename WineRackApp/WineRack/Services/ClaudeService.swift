@@ -17,6 +17,7 @@ enum ClaudeError: LocalizedError {
     case missingKey
     case invalidKey
     case unreadableLabel
+    case noResults
     case noConnection
     case timedOut
     case otherNetwork
@@ -32,6 +33,8 @@ enum ClaudeError: LocalizedError {
             "De API-sleutel is ongeldig (fout 401). Controleer je sleutel bij het tandwiel."
         case .unreadableLabel:
             "Claude kon het etiket niet lezen. Probeer een scherpere foto, of vul de wijn zelf in."
+        case .noResults:
+            "Claude vond geen wijn met deze naam. Probeer een andere schrijfwijze of voeg de producent of jaargang toe."
         case .noConnection:
             "Er is geen internetverbinding. Controleer je verbinding en probeer het opnieuw."
         case .timedOut:
@@ -48,11 +51,77 @@ enum ClaudeError: LocalizedError {
     }
 }
 
-// Stuurt een foto van het etiket naar Claude en krijgt de wijngegevens terug.
+// Vraagt Claude om wijngegevens: via een foto van het etiket of via een zoekterm.
 enum ClaudeService {
+    // Foto van het etiket laten lezen.
     static func scanLabel(jpegData: Data) async throws -> LabelScanResult {
-        guard let apiKey = KeychainService.loadAPIKey() else { throw ClaudeError.missingKey }
         let year = DrinkStatus.currentYear
+        let content: [[String: Any]] = [
+            [
+                "type": "image",
+                "source": [
+                    "type": "base64",
+                    "media_type": "image/jpeg",
+                    "data": jpegData.base64EncodedString()
+                ]
+            ],
+            ["type": "text", "text": "Lees dit wijnetiket. Het huidige jaar is \(year)."]
+        ]
+
+        // Afgebroken, geweigerd of onleesbaar antwoord telt als "niet leesbaar".
+        guard let text = try await send(system: labelPrompt(year: year), content: content, schema: labelSchema),
+              var scan = LabelScanResult.parse(from: text),
+              scan.isUsable else {
+            throw ClaudeError.unreadableLabel
+        }
+        // Geen wijnnaam gevonden? Dan de producent als naam voorstellen.
+        if scan.name.isEmpty {
+            scan.name = scan.producer
+        }
+        return scan
+    }
+
+    // Wijnen zoeken op naam (maximaal 5 mogelijke treffers).
+    static func searchWines(query: String) async throws -> [LabelScanResult] {
+        let year = DrinkStatus.currentYear
+        let content: [[String: Any]] = [
+            ["type": "text", "text": "Zoek deze wijn: \(query)"]
+        ]
+
+        guard let text = try await send(system: searchPrompt(year: year), content: content, schema: searchSchema),
+              let response = WineSearchResponse.parse(from: text) else {
+            throw ClaudeError.noResults
+        }
+        let wines = response.wines
+            .filter(\.isUsable)
+            .map { wine -> LabelScanResult in
+                var wine = wine
+                if wine.name.isEmpty { wine.name = wine.producer }
+                return wine
+            }
+        guard !wines.isEmpty else { throw ClaudeError.noResults }
+        return Array(wines.prefix(5))
+    }
+
+    // MARK: - Versturen
+
+    // Stuurt het verzoek en geeft de tekst van het antwoord terug.
+    // Geeft nil als het antwoord is afgebroken of geweigerd.
+    private static func send(system: String, content: [[String: Any]], schema: [String: Any]) async throws -> String? {
+        guard let apiKey = KeychainService.loadAPIKey() else { throw ClaudeError.missingKey }
+
+        let body: [String: Any] = [
+            "model": ClaudeConfig.model,
+            "max_tokens": ClaudeConfig.maxTokens,
+            "system": system,
+            "output_config": [
+                // Eenvoudig werk: weinig nadenken is genoeg (sneller en goedkoper).
+                "effort": "low",
+                // Dwingt een antwoord af dat precies aan het JSON-schema voldoet.
+                "format": ["type": "json_schema", "schema": schema]
+            ],
+            "messages": [["role": "user", "content": content]]
+        ]
 
         var request = URLRequest(url: ClaudeConfig.endpoint)
         request.httpMethod = "POST"
@@ -60,9 +129,8 @@ enum ClaudeService {
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
         request.setValue(ClaudeConfig.apiVersion, forHTTPHeaderField: "anthropic-version")
         request.setValue("application/json", forHTTPHeaderField: "content-type")
-        request.httpBody = try JSONSerialization.data(withJSONObject: requestBody(jpegData: jpegData, year: year))
+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
 
-        // Versturen.
         let result: (Data, URLResponse)
         do {
             result = try await URLSession.shared.data(for: request)
@@ -90,102 +158,101 @@ enum ClaudeService {
         default: throw ClaudeError.server(status: status)
         }
 
-        // Afgebroken of geweigerd antwoord telt als "niet leesbaar".
         guard let message = try? JSONDecoder().decode(MessagesResponse.self, from: data),
               message.stopReason != "max_tokens",
               message.stopReason != "refusal" else {
-            throw ClaudeError.unreadableLabel
+            return nil
         }
-
-        // De tekst uit het antwoord als JSON inlezen.
-        let text = message.content.compactMap(\.text).joined()
-        guard var scan = LabelScanResult.parse(from: text), scan.isUsable else {
-            throw ClaudeError.unreadableLabel
-        }
-        // Geen wijnnaam gevonden? Dan de producent als naam voorstellen.
-        if scan.name.isEmpty {
-            scan.name = scan.producer
-        }
-        return scan
+        return message.content.compactMap(\.text).joined()
     }
 
-    private static func requestBody(jpegData: Data, year: Int) -> [String: Any] {
-        [
-            "model": ClaudeConfig.model,
-            "max_tokens": ClaudeConfig.maxTokens,
-            "system": systemPrompt(year: year),
-            "output_config": [
-                // Een etiket lezen is eenvoudig werk: weinig nadenken is genoeg.
-                "effort": "low",
-                // Dwingt een antwoord af dat precies aan dit JSON-schema voldoet.
-                "format": [
-                    "type": "json_schema",
-                    "schema": labelSchema
-                ]
-            ],
-            "messages": [
-                [
-                    "role": "user",
-                    "content": [
-                        [
-                            "type": "image",
-                            "source": [
-                                "type": "base64",
-                                "media_type": "image/jpeg",
-                                "data": jpegData.base64EncodedString()
-                            ]
-                        ],
-                        [
-                            "type": "text",
-                            "text": "Lees dit wijnetiket. Het huidige jaar is \(year)."
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    }
+    // MARK: - Schema's
 
-    // Het JSON-schema van het antwoord.
-    private static var labelSchema: [String: Any] {
+    // Velden van één wijn in het antwoord.
+    private static var wineProperties: [String: Any] {
         let text: [String: Any] = ["type": "string"]
         let year: [String: Any] = ["anyOf": [["type": "integer"], ["type": "null"]]]
         return [
+            "name": text,
+            "producer": text,
+            "vintage": year,
+            "grape": text,
+            "region": text,
+            "country": text,
+            "type": ["type": "string", "enum": WineType.allCases.map(\.rawValue)],
+            "drinkFrom": year,
+            "drinkBy": year,
+            "pairings": ["type": "array", "items": text],
+            "notes": text
+        ]
+    }
+
+    private static let wineFields = ["name", "producer", "vintage", "grape", "region", "country",
+                                     "type", "drinkFrom", "drinkBy", "pairings", "notes"]
+
+    // Antwoord bij een etiketfoto: één wijn plus "leesbaar ja/nee".
+    private static var labelSchema: [String: Any] {
+        var properties = wineProperties
+        properties["readable"] = ["type": "boolean"]
+        return [
             "type": "object",
-            "properties": [
-                "readable": ["type": "boolean"],
-                "name": text,
-                "producer": text,
-                "vintage": year,
-                "grape": text,
-                "region": text,
-                "country": text,
-                "type": ["type": "string", "enum": WineType.allCases.map(\.rawValue)],
-                "drinkFrom": year,
-                "drinkBy": year,
-                "pairings": ["type": "array", "items": text],
-                "notes": text
-            ],
-            "required": ["readable", "name", "producer", "vintage", "grape", "region", "country",
-                         "type", "drinkFrom", "drinkBy", "pairings", "notes"],
+            "properties": properties,
+            "required": ["readable"] + wineFields,
             "additionalProperties": false
         ]
     }
 
-    private static func systemPrompt(year: Int) -> String {
-        """
-        Je bent een ervaren sommelier. Je krijgt een foto van een wijnetiket. Het huidige jaar is \(year).
-        Antwoord alleen met JSON volgens het opgegeven schema.
+    // Antwoord bij zoeken: een lijst wijnen.
+    private static var searchSchema: [String: Any] {
+        let wine: [String: Any] = [
+            "type": "object",
+            "properties": wineProperties,
+            "required": wineFields,
+            "additionalProperties": false
+        ]
+        return [
+            "type": "object",
+            "properties": ["wines": ["type": "array", "items": wine]],
+            "required": ["wines"],
+            "additionalProperties": false
+        ]
+    }
 
-        Regels:
-        - readable: false als het geen wijnetiket is of als je het niet kunt lezen; anders true.
+    // MARK: - Prompts
+
+    // Regels die voor elke wijn gelden.
+    private static func wineRules(year: Int) -> String {
+        """
         - name: de naam van de wijn (zonder jaargang).
-        - vintage: de jaargang, of null als die er niet op staat.
+        - vintage: de jaargang, of null als die onbekend is.
         - country: het land in het Nederlands (bijv. Frankrijk, Italië, Spanje, Duitsland).
         - type: precies één van: Rood, Wit, Rosé, Mousserend, Dessert, Versterkt, Overig.
         - drinkFrom en drinkBy: jaartallen waarin de wijn op zijn best is. Schat ze op basis van stijl, regio, kwaliteit en jaargang, met \(year) als huidig jaar.
         - pairings: 4 tot 6 passende gerechten, in het Nederlands.
         - notes: 1 tot 2 zinnen over de smaak, in het Nederlands.
         - Onbekende tekst: lege string. Onbekend jaartal: null.
+        """
+    }
+
+    private static func labelPrompt(year: Int) -> String {
+        """
+        Je bent een ervaren sommelier. Je krijgt een foto van een wijnetiket. Het huidige jaar is \(year).
+        Antwoord alleen met JSON volgens het opgegeven schema.
+
+        Regels:
+        - readable: false als het geen wijnetiket is of als je het niet kunt lezen; anders true.
+        \(wineRules(year: year))
+        """
+    }
+
+    private static func searchPrompt(year: Int) -> String {
+        """
+        Je bent een ervaren sommelier met grote kennis van wijnen en producenten. Je krijgt een zoekterm, bijvoorbeeld de naam van een wijn, een producent of een jaargang. Het huidige jaar is \(year).
+        Geef de wijnen die het best bij de zoekterm passen: de beste treffer eerst, maximaal 5. Noem alleen wijnen die echt bestaan; verzin geen wijnen. Staat er een jaargang in de zoekterm, gebruik die dan. Ken je geen passende wijn, geef dan een lege lijst.
+        Antwoord alleen met JSON volgens het opgegeven schema.
+
+        Regels per wijn:
+        \(wineRules(year: year))
         """
     }
 
