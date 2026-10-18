@@ -51,7 +51,10 @@ struct WineListView: View {
 
     // De lijst met filter, groepen en de sectie "Op".
     private var wineList: some View {
-        List {
+        // Eén keer filteren en groeperen per keer dat het scherm wordt opgebouwd.
+        let content = ListContent(wines: wines.filter { matchesFilters($0) })
+
+        return List {
             Section {
                 Picker("Locatie", selection: $filter) {
                     ForEach(LocationFilter.allCases) { option in
@@ -59,10 +62,10 @@ struct WineListView: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                LabeledContent("Totaal", value: bottlesText(totalBottles))
+                LabeledContent("Totaal", value: bottlesText(content.totalBottles))
             }
 
-            ForEach(groups, id: \.status) { group in
+            ForEach(content.groups, id: \.status) { group in
                 Section {
                     ForEach(group.wines) { wine in row(for: wine) }
                 } header: {
@@ -71,15 +74,15 @@ struct WineListView: View {
                 }
             }
 
-            if !finishedWines.isEmpty {
+            if !content.finished.isEmpty {
                 Section("Op") {
-                    ForEach(finishedWines) { wine in row(for: wine) }
+                    ForEach(content.finished) { wine in row(for: wine) }
                 }
             }
         }
         .searchable(text: $searchText, prompt: "Naam, druif, regio of gerecht")
         .overlay {
-            if filteredWines.isEmpty && !searchText.isEmpty {
+            if content.isEmpty && !searchText.isEmpty {
                 ContentUnavailableView.search(text: searchText)
             }
         }
@@ -107,46 +110,46 @@ struct WineListView: View {
 
     // MARK: - Filteren en groeperen
 
-    private struct WineGroup {
-        let status: DrinkStatus
-        let wines: [Wine]
-    }
-
-    private var filteredWines: [Wine] {
-        wines.filter { wine in
-            (filter.location == nil || wine.location == filter.location) && matchesSearch(wine)
-        }
-    }
-
-    private func matchesSearch(_ wine: Wine) -> Bool {
+    private func matchesFilters(_ wine: Wine) -> Bool {
+        if let location = filter.location, wine.location != location { return false }
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !query.isEmpty else { return true }
         let fields = [wine.name, wine.producer, wine.grape, wine.region] + wine.pairings
         return fields.contains { $0.localizedStandardContains(query) }
     }
 
-    // Wijnen met flessen, per drinkstatus; binnen een groep op "drinken vóór".
-    private var groups: [WineGroup] {
-        let inStock = filteredWines.filter { $0.quantity > 0 }
-        return DrinkStatus.allCases.compactMap { status in
-            let items = inStock
-                .filter { $0.drinkStatus == status }
-                .sorted { ($0.drinkBy ?? Int.max) < ($1.drinkBy ?? Int.max) }
-            return items.isEmpty ? nil : WineGroup(status: status, wines: items)
-        }
-    }
-
-    // Wijnen waarvan alle flessen op zijn.
-    private var finishedWines: [Wine] {
-        filteredWines.filter { $0.quantity == 0 }
-    }
-
-    private var totalBottles: Int {
-        filteredWines.reduce(0) { $0 + $1.quantity }
-    }
-
     private func bottlesText(_ count: Int) -> String {
         count == 1 ? "1 fles" : "\(count) flessen"
+    }
+}
+
+// De gefilterde wijnen, verdeeld over de secties van de lijst.
+private struct ListContent {
+    struct StatusGroup {
+        let status: DrinkStatus
+        let wines: [Wine]
+    }
+
+    let groups: [StatusGroup]
+    let finished: [Wine]
+    let totalBottles: Int
+    let isEmpty: Bool
+
+    init(wines: [Wine]) {
+        let year = DrinkStatus.currentYear
+        let inStock = wines.filter { $0.quantity > 0 }
+        // Per drinkstatus; binnen een groep op "drinken vóór" (onbekend achteraan).
+        let byStatus = Dictionary(grouping: inStock) {
+            DrinkStatus(drinkFrom: $0.drinkFrom, drinkBy: $0.drinkBy, year: year)
+        }
+        groups = DrinkStatus.allCases.compactMap { status in
+            guard let items = byStatus[status] else { return nil }
+            let sorted = items.sorted { ($0.drinkBy ?? Int.max) < ($1.drinkBy ?? Int.max) }
+            return StatusGroup(status: status, wines: sorted)
+        }
+        finished = wines.filter { $0.quantity == 0 }
+        totalBottles = wines.reduce(0) { $0 + $1.quantity }
+        isEmpty = wines.isEmpty
     }
 }
 

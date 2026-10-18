@@ -15,12 +15,18 @@ enum KeychainService {
         ]
     }
 
-    // Slaat de sleutel op (een oude sleutel wordt eerst verwijderd).
+    // Slaat de sleutel op. Een bestaande sleutel wordt overschreven, niet eerst gewist,
+    // zodat de oude sleutel blijft staan als het bewaren mislukt.
     @discardableResult
     static func saveAPIKey(_ key: String) -> Bool {
-        deleteAPIKey()
+        let data = Data(key.utf8)
+        let update: [String: Any] = [kSecValueData as String: data]
+        let status = SecItemUpdate(baseQuery as CFDictionary, update as CFDictionary)
+        if status == errSecSuccess { return true }
+        guard status == errSecItemNotFound else { return false }
+
         var query = baseQuery
-        query[kSecValueData as String] = Data(key.utf8)
+        query[kSecValueData as String] = data
         query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
         return SecItemAdd(query as CFDictionary, nil) == errSecSuccess
     }

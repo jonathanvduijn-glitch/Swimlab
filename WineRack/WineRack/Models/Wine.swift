@@ -21,6 +21,8 @@ final class Wine {
     var notes: String = ""
     var rating: Int = 0
     @Attribute(.externalStorage) var labelImage: Data? = nil
+    // Kleine versie van het etiket voor de lijst (snel te tonen).
+    var thumbnail: Data? = nil
     var dateAdded: Date = Date.now
 
     // Gedronken flessen; worden mee verwijderd als de wijn wordt verwijderd.

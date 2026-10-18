@@ -40,8 +40,28 @@ struct WineDraft {
         imageData = wine.labelImage
     }
 
+    // Jaartallen buiten dit bereik zijn vrijwel zeker een tikfout.
+    static let validYears = 1800...2200
+
     var hasName: Bool {
         !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    // Uitleg als een jaartal niet klopt; nil als alles in orde is.
+    var yearProblem: String? {
+        let years = [vintage, drinkFrom, drinkBy].compactMap { $0 }
+        if years.contains(where: { !Self.validYears.contains($0) }) {
+            return "Vul jaartallen met 4 cijfers in, bijvoorbeeld 2030."
+        }
+        if let drinkFrom, let drinkBy, drinkFrom > drinkBy {
+            return "\"Vanaf\" moet vóór of gelijk aan \"Vóór\" liggen."
+        }
+        return nil
+    }
+
+    // Bewaren mag als er een naam is en de jaartallen kloppen.
+    var canSave: Bool {
+        hasName && yearProblem == nil
     }
 
     // Waarden uit het formulier overzetten naar de wijn.
@@ -60,6 +80,10 @@ struct WineDraft {
         wine.pairings = pairings
         wine.notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
         wine.rating = min(max(rating, 0), 5)
-        wine.labelImage = imageData
+        // Miniatuur alleen opnieuw maken als de foto veranderd is.
+        if wine.labelImage != imageData || (imageData != nil && wine.thumbnail == nil) {
+            wine.labelImage = imageData
+            wine.thumbnail = imageData.flatMap { ImageResizer.thumbnailData(from: $0) }
+        }
     }
 }

@@ -28,9 +28,15 @@ struct WineFormView: View {
                     }
                 }
             }
-            Section("Drinkperiode") {
+            Section {
                 YearField(title: "Vanaf", year: $draft.drinkFrom)
                 YearField(title: "Vóór", year: $draft.drinkBy)
+            } header: {
+                Text("Drinkperiode")
+            } footer: {
+                if let problem = draft.yearProblem {
+                    Text(problem).foregroundStyle(.red)
+                }
             }
             pairingsSection
             Section("Beoordeling") {
@@ -49,7 +55,7 @@ struct WineFormView: View {
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button("Bewaar") { onSave(draft) }
-                    .disabled(!draft.hasName)
+                    .disabled(!draft.canSave)
             }
         }
     }

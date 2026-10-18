@@ -4,6 +4,7 @@ import Foundation
 // Het inlezen is bewust vergevingsgezind: jaartallen mogen een getal of tekst zijn,
 // en ontbrekende velden worden leeg.
 struct LabelScanResult: Decodable {
+    var readable = true
     var name = ""
     var producer = ""
     var vintage: Int?
@@ -17,11 +18,12 @@ struct LabelScanResult: Decodable {
     var notes = ""
 
     private enum CodingKeys: String, CodingKey {
-        case name, producer, vintage, grape, region, country, type, drinkFrom, drinkBy, pairings, notes
+        case readable, name, producer, vintage, grape, region, country, type, drinkFrom, drinkBy, pairings, notes
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        readable = (try? container.decodeIfPresent(Bool.self, forKey: .readable)) ?? true
         name = Self.text(container, .name)
         producer = Self.text(container, .producer)
         vintage = Self.year(container, .vintage)
@@ -32,10 +34,17 @@ struct LabelScanResult: Decodable {
         drinkFrom = Self.year(container, .drinkFrom)
         drinkBy = Self.year(container, .drinkBy)
         notes = Self.text(container, .notes)
+        // Gerechten opschonen: geen lege en geen dubbele.
         let list = (try? container.decodeIfPresent([String].self, forKey: .pairings)) ?? []
-        pairings = list
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { !$0.isEmpty }
+        for dish in list.map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
+        where !dish.isEmpty && !pairings.contains(dish) {
+            pairings.append(dish)
+        }
+    }
+
+    // Bruikbaar als Claude het etiket kon lezen en er een naam of producent op stond.
+    var isUsable: Bool {
+        readable && !(name.isEmpty && producer.isEmpty)
     }
 
     // Zoekt de eerste { en de laatste } in het antwoord en leest de JSON daartussen.
@@ -68,7 +77,7 @@ struct LabelScanResult: Decodable {
     }
 
     private static func validYear(_ year: Int?) -> Int? {
-        guard let year, (1800...2200).contains(year) else { return nil }
+        guard let year, WineDraft.validYears.contains(year) else { return nil }
         return year
     }
 }

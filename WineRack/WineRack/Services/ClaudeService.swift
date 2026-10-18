@@ -7,15 +7,22 @@ enum ClaudeConfig {
 
     static let endpoint = URL(string: "https://api.anthropic.com/v1/messages")!
     static let apiVersion = "2023-06-01"
+
+    // Ruim genoeg voor het nadenken van het model plus het JSON-antwoord.
+    static let maxTokens = 16000
 }
 
-// Foutmeldingen in gewone taal.
+// Foutmeldingen in gewone taal (altijd Nederlands).
 enum ClaudeError: LocalizedError {
     case missingKey
     case invalidKey
     case unreadableLabel
-    case network(String)
-    case server(status: Int, message: String?)
+    case noConnection
+    case timedOut
+    case otherNetwork
+    case tooManyRequests
+    case overloaded
+    case server(status: Int)
 
     var errorDescription: String? {
         switch self {
@@ -25,10 +32,18 @@ enum ClaudeError: LocalizedError {
             "De API-sleutel is ongeldig (fout 401). Controleer je sleutel bij het tandwiel."
         case .unreadableLabel:
             "Claude kon het etiket niet lezen. Probeer een scherpere foto, of vul de wijn zelf in."
-        case .network(let detail):
-            "Er is geen verbinding met Claude gelukt. Controleer je internet en probeer het opnieuw. (\(detail))"
-        case .server(let status, let message):
-            "Er ging iets mis bij Claude (fout \(status)). \(message ?? "Probeer het later opnieuw.")"
+        case .noConnection:
+            "Er is geen internetverbinding. Controleer je verbinding en probeer het opnieuw."
+        case .timedOut:
+            "Claude deed er te lang over. Probeer het opnieuw."
+        case .otherNetwork:
+            "Er is geen verbinding met Claude gelukt. Probeer het opnieuw."
+        case .tooManyRequests:
+            "Er zijn te veel verzoeken achter elkaar gedaan (fout 429). Wacht even en probeer het opnieuw."
+        case .overloaded:
+            "Claude is op dit moment erg druk. Probeer het over een paar minuten opnieuw."
+        case .server(let status):
+            "Er ging iets mis bij Claude (fout \(status)). Probeer het later opnieuw."
         }
     }
 }
@@ -41,7 +56,7 @@ enum ClaudeService {
 
         var request = URLRequest(url: ClaudeConfig.endpoint)
         request.httpMethod = "POST"
-        request.timeoutInterval = 90
+        request.timeoutInterval = 120
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
         request.setValue(ClaudeConfig.apiVersion, forHTTPHeaderField: "anthropic-version")
         request.setValue("application/json", forHTTPHeaderField: "content-type")
@@ -51,23 +66,45 @@ enum ClaudeService {
         let result: (Data, URLResponse)
         do {
             result = try await URLSession.shared.data(for: request)
+        } catch let error as URLError {
+            switch error.code {
+            case .notConnectedToInternet, .networkConnectionLost, .dataNotAllowed:
+                throw ClaudeError.noConnection
+            case .timedOut:
+                throw ClaudeError.timedOut
+            default:
+                throw ClaudeError.otherNetwork
+            }
         } catch {
-            throw ClaudeError.network(error.localizedDescription)
+            throw ClaudeError.otherNetwork
         }
         let (data, response) = result
 
-        // Antwoord controleren.
+        // Statuscode controleren.
         let status = (response as? HTTPURLResponse)?.statusCode ?? 0
-        if status == 401 { throw ClaudeError.invalidKey }
-        guard status == 200 else {
-            throw ClaudeError.server(status: status, message: apiErrorMessage(from: data))
+        switch status {
+        case 200: break
+        case 401: throw ClaudeError.invalidKey
+        case 429: throw ClaudeError.tooManyRequests
+        case 529: throw ClaudeError.overloaded
+        default: throw ClaudeError.server(status: status)
         }
 
-        // De tekst uit het antwoord halen en als JSON inlezen.
-        let message = try? JSONDecoder().decode(MessagesResponse.self, from: data)
-        let text = message?.content.compactMap(\.text).joined() ?? ""
-        guard let scan = LabelScanResult.parse(from: text), !scan.name.isEmpty else {
+        // Afgebroken of geweigerd antwoord telt als "niet leesbaar".
+        guard let message = try? JSONDecoder().decode(MessagesResponse.self, from: data),
+              message.stopReason != "max_tokens",
+              message.stopReason != "refusal" else {
             throw ClaudeError.unreadableLabel
+        }
+
+        // De tekst uit het antwoord als JSON inlezen.
+        let text = message.content.compactMap(\.text).joined()
+        guard var scan = LabelScanResult.parse(from: text), scan.isUsable else {
+            throw ClaudeError.unreadableLabel
+        }
+        // Geen wijnnaam gevonden? Dan de producent als naam voorstellen.
+        if scan.name.isEmpty {
+            scan.name = scan.producer
         }
         return scan
     }
@@ -75,8 +112,17 @@ enum ClaudeService {
     private static func requestBody(jpegData: Data, year: Int) -> [String: Any] {
         [
             "model": ClaudeConfig.model,
-            "max_tokens": 1024,
+            "max_tokens": ClaudeConfig.maxTokens,
             "system": systemPrompt(year: year),
+            "output_config": [
+                // Een etiket lezen is eenvoudig werk: weinig nadenken is genoeg.
+                "effort": "low",
+                // Dwingt een antwoord af dat precies aan dit JSON-schema voldoet.
+                "format": [
+                    "type": "json_schema",
+                    "schema": labelSchema
+                ]
+            ],
             "messages": [
                 [
                     "role": "user",
@@ -91,7 +137,7 @@ enum ClaudeService {
                         ],
                         [
                             "type": "text",
-                            "text": "Lees dit wijnetiket. Het huidige jaar is \(year). Antwoord alleen met JSON."
+                            "text": "Lees dit wijnetiket. Het huidige jaar is \(year)."
                         ]
                     ]
                 ]
@@ -99,30 +145,48 @@ enum ClaudeService {
         ]
     }
 
+    // Het JSON-schema van het antwoord.
+    private static var labelSchema: [String: Any] {
+        let text: [String: Any] = ["type": "string"]
+        let year: [String: Any] = ["anyOf": [["type": "integer"], ["type": "null"]]]
+        return [
+            "type": "object",
+            "properties": [
+                "readable": ["type": "boolean"],
+                "name": text,
+                "producer": text,
+                "vintage": year,
+                "grape": text,
+                "region": text,
+                "country": text,
+                "type": ["type": "string", "enum": WineType.allCases.map(\.rawValue)],
+                "drinkFrom": year,
+                "drinkBy": year,
+                "pairings": ["type": "array", "items": text],
+                "notes": text
+            ],
+            "required": ["readable", "name", "producer", "vintage", "grape", "region", "country",
+                         "type", "drinkFrom", "drinkBy", "pairings", "notes"],
+            "additionalProperties": false
+        ]
+    }
+
     private static func systemPrompt(year: Int) -> String {
         """
         Je bent een ervaren sommelier. Je krijgt een foto van een wijnetiket. Het huidige jaar is \(year).
-        Antwoord ALLEEN met één JSON-object, zonder uitleg en zonder markdown, precies in deze vorm:
-        {"name": "", "producer": "", "vintage": 2019, "grape": "", "region": "", "country": "", "type": "", "drinkFrom": 2024, "drinkBy": 2030, "pairings": [""], "notes": ""}
+        Antwoord alleen met JSON volgens het opgegeven schema.
 
         Regels:
+        - readable: false als het geen wijnetiket is of als je het niet kunt lezen; anders true.
         - name: de naam van de wijn (zonder jaargang).
-        - vintage: de jaargang als getal, of null als die er niet op staat.
+        - vintage: de jaargang, of null als die er niet op staat.
         - country: het land in het Nederlands (bijv. Frankrijk, Italië, Spanje, Duitsland).
         - type: precies één van: Rood, Wit, Rosé, Mousserend, Dessert, Versterkt, Overig.
         - drinkFrom en drinkBy: jaartallen waarin de wijn op zijn best is. Schat ze op basis van stijl, regio, kwaliteit en jaargang, met \(year) als huidig jaar.
         - pairings: 4 tot 6 passende gerechten, in het Nederlands.
         - notes: 1 tot 2 zinnen over de smaak, in het Nederlands.
         - Onbekende tekst: lege string. Onbekend jaartal: null.
-        - Kun je het etiket niet lezen, antwoord dan: {"error": "onleesbaar"}
         """
-    }
-
-    // Haalt de foutmelding uit een foutantwoord van de API (als die er is).
-    private static func apiErrorMessage(from data: Data) -> String? {
-        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let error = json["error"] as? [String: Any] else { return nil }
-        return error["message"] as? String
     }
 
     // Alleen het deel van het API-antwoord dat we nodig hebben.
@@ -132,5 +196,11 @@ enum ClaudeService {
             let text: String?
         }
         let content: [Block]
+        let stopReason: String?
+
+        enum CodingKeys: String, CodingKey {
+            case content
+            case stopReason = "stop_reason"
+        }
     }
 }

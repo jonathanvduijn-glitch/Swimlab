@@ -43,7 +43,16 @@ programmeur: praat Nederlands, in gewone taal. Alle tekst in de app is Nederland
   `anthropic-version: 2023-06-01`, `content-type: application/json`. Het model staat
   in één constante: `ClaudeConfig.model` in `Services/ClaudeService.swift`
   (nu `claude-sonnet-5-5`).
-- Foto's: max. 1568 px naar de API, max. 1024 px bewaard (JPEG, externalStorage).
+- Het verzoek gebruikt `output_config.format` (JSON-schema) zodat het antwoord altijd
+  geldige JSON is, `effort: "low"` en `max_tokens: 16000` (het model denkt standaard
+  eerst na en dat telt mee). `stop_reason` "max_tokens" of "refusal" geeft de melding
+  "etiket onleesbaar". Alle foutmeldingen zijn Nederlands; Engelse API-teksten worden
+  nooit getoond.
+- Foto's: max. 1568 px naar de API, max. 1024 px bewaard (JPEG, externalStorage),
+  plus een miniatuur van 160 px (`Wine.thumbnail`) voor de lijst. Verkleinen gebeurt
+  buiten de hoofdthread.
+- Jaartallen in het formulier moeten tussen 1800 en 2200 liggen en "vanaf" mag niet
+  na "vóór" liggen; anders is "Bewaar" uitgeschakeld.
 - De API-sleutel staat ALLEEN in de Keychain. Nooit in code, logs of UserDefaults.
 - Camera-toestemming: NSCameraUsageDescription staat in de build settings
   (`INFOPLIST_KEY_NSCameraUsageDescription`).

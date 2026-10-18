@@ -64,6 +64,7 @@ struct SettingsView: View {
             messageIsError = false
             message = "Sleutel bewaard."
         } else {
+            hasKey = KeychainService.loadAPIKey() != nil
             messageIsError = true
             message = "Bewaren is niet gelukt. Probeer het opnieuw."
         }

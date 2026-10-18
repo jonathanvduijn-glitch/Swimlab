@@ -115,8 +115,9 @@ struct AddWineView: View {
         isScanning = true
         defer { isScanning = false }
 
-        photoData = ImageResizer.jpegData(from: image, maxDimension: ImageResizer.storageMaxDimension, quality: 0.7)
-        guard let upload = ImageResizer.jpegData(from: image, maxDimension: ImageResizer.apiMaxDimension) else {
+        let prepared = await ImageResizer.prepareForScan(image)
+        photoData = prepared.stored
+        guard let upload = prepared.upload else {
             errorMessage = "Deze foto kon niet worden verwerkt."
             return
         }
