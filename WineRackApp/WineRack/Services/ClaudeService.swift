@@ -22,6 +22,8 @@ enum ClaudeError: LocalizedError {
     case unreadableLabel
     case noResults
     case webSearchUnavailable
+    case noCredit
+    case badRequest
     case noConnection
     case timedOut
     case otherNetwork
@@ -41,6 +43,10 @@ enum ClaudeError: LocalizedError {
             "Claude vond geen wijn met deze naam. Probeer een andere schrijfwijze of voeg de producent of jaargang toe."
         case .webSearchUnavailable:
             "Zoeken op internet lukte niet. Controleer in de Claude Console of zoeken op internet aanstaat voor je account."
+        case .noCredit:
+            "Er staat geen tegoed meer op je Claude-account. Waardeer op via platform.claude.com → Billing en probeer het daarna opnieuw."
+        case .badRequest:
+            "Claude weigerde het verzoek (fout 400). Controleer bij het tandwiel met \"Test verbinding\" of je sleutel werkt."
         case .noConnection:
             "Er is geen internetverbinding. Controleer je verbinding en probeer het opnieuw."
         case .timedOut:
@@ -218,15 +224,8 @@ enum ClaudeService {
 
         // Statuscode controleren.
         let status = (response as? HTTPURLResponse)?.statusCode ?? 0
-        if usesWebSearch && (status == 400 || status == 403) {
-            throw ClaudeError.webSearchUnavailable
-        }
-        switch status {
-        case 200: break
-        case 401: throw ClaudeError.invalidKey
-        case 429: throw ClaudeError.tooManyRequests
-        case 529: throw ClaudeError.overloaded
-        default: throw ClaudeError.server(status: status)
+        if status != 200 {
+            throw mapError(status: status, message: apiErrorMessage(from: data), usesWebSearch: usesWebSearch)
         }
 
         guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
@@ -238,6 +237,45 @@ enum ClaudeService {
             .compactMap { $0["text"] as? String }
             .joined()
         return Reply(stopReason: json["stop_reason"] as? String, text: text, content: content)
+    }
+
+    // Zet een foutantwoord om naar een Nederlandse melding.
+    // De Engelse tekst van de API wordt alleen gebruikt om de oorzaak te herkennen, nooit getoond.
+    private static func mapError(status: Int, message: String, usesWebSearch: Bool) -> ClaudeError {
+        let text = message.lowercased()
+        if text.contains("credit balance") || text.contains("billing") {
+            return .noCredit
+        }
+        if usesWebSearch && (text.contains("web search") || text.contains("web_search")) {
+            return .webSearchUnavailable
+        }
+        switch status {
+        case 401: return .invalidKey
+        case 400: return .badRequest
+        case 403: return usesWebSearch ? .webSearchUnavailable : .invalidKey
+        case 429: return .tooManyRequests
+        case 529: return .overloaded
+        default: return .server(status: status)
+        }
+    }
+
+    private static func apiErrorMessage(from data: Data) -> String {
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let error = json["error"] as? [String: Any],
+              let message = error["message"] as? String else { return "" }
+        return message
+    }
+
+    // MARK: - Verbinding testen
+
+    // Klein testverzoek: werkt de sleutel en is er tegoed? Gooit een ClaudeError als iets niet klopt.
+    static func testConnection() async throws {
+        _ = try await post(body: [
+            "model": ClaudeConfig.model,
+            "max_tokens": 1024,
+            "output_config": ["effort": "low"],
+            "messages": [["role": "user", "content": "Antwoord alleen met: ok"]]
+        ], usesWebSearch: false)
     }
 
     // MARK: - Schema's
