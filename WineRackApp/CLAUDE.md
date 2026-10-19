@@ -23,7 +23,8 @@ programmeur: praat Nederlands, in gewone taal. Alle tekst in de app is Nederland
   opgeslagen), sterren, "Past bij", notities en geschiedenis van gedronken flessen.
 - "Fles gedronken": datum, gerecht (snelkeuze uit de gerechten van de wijn),
   notitie. Slaat een Tasting op en verlaagt het aantal met 1 (niet onder 0).
-- Instellingen: Claude API-sleutel invullen (alleen in de Keychain), model tonen.
+- Instellingen: Claude API-sleutel invullen (alleen in de Keychain), knop "Test
+  verbinding" (klein testverzoek: werkt de sleutel, is er tegoed?), model tonen.
 
 ### Drinkstatus (berekend uit het huidige jaar)
 
@@ -55,9 +56,11 @@ programmeur: praat Nederlands, in gewone taal. Alle tekst in de app is Nederland
   "etiket onleesbaar". Zoeken op internet gebruikt geen `output_config.format`
   (combinatie met web search niet gedocumenteerd): JSON via de prompt, en als dat
   niet te lezen is een tweede verzoek mét schema dat de tekst omzet. `pause_turn`
-  wordt maximaal 3 keer hervat. Status 400/403 bij internetzoeken = "zoeken op
-  internet staat waarschijnlijk uit in de Claude Console". Alle foutmeldingen zijn Nederlands; Engelse API-teksten worden
-  nooit getoond.
+  wordt maximaal 3 keer hervat.
+- Foutafhandeling (`ClaudeService.mapError`): de Engelse foutmelding van de API wordt
+  alleen gebruikt om de oorzaak te herkennen ("credit balance" = geen tegoed, "web
+  search" = zoeken op internet staat uit) en nooit getoond. Alle meldingen in de app
+  zijn Nederlands.
 - Foto's: max. 1568 px naar de API, max. 1024 px bewaard (JPEG, externalStorage),
   plus een miniatuur van 160 px (`Wine.thumbnail`) voor de lijst. Verkleinen gebeurt
   buiten de hoofdthread.
