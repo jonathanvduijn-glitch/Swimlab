@@ -5,16 +5,24 @@ import PhotosUI
 // Nieuwe wijn: eerst een foto maken of kiezen, Claude leest het etiket,
 // daarna controleer je alles in het formulier.
 struct AddWineView: View {
+    // Zoekterm uit de zoekbalk van het hoofdscherm; opent dan meteen "Zoek op naam".
+    private let initialSearch: String
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
 
     @State private var pickerItem: PhotosPickerItem?
     @State private var showingCamera = false
     @State private var showingSearch = false
+    @State private var didOpenInitialSearch = false
     @State private var isScanning = false
     @State private var photoData: Data?
     @State private var errorMessage: String?
     @State private var draft: WineDraft?
+
+    init(initialSearch: String = "") {
+        self.initialSearch = initialSearch
+    }
 
     var body: some View {
         NavigationStack {
@@ -59,11 +67,18 @@ struct AddWineView: View {
                 Button("Annuleer") { dismiss() }
             }
         }
+        .onAppear {
+            // Vanuit de zoekbalk: direct naar het zoekscherm (maar één keer).
+            if !initialSearch.isEmpty && !didOpenInitialSearch {
+                didOpenInitialSearch = true
+                showingSearch = true
+            }
+        }
         .onChange(of: pickerItem) { _, item in
             Task { await loadPickedPhoto(item) }
         }
         .navigationDestination(isPresented: $showingSearch) {
-            WineSearchView { result in
+            WineSearchView(initialQuery: initialSearch) { result in
                 var found = WineDraft()
                 found.fill(from: result)
                 showingSearch = false

@@ -3,6 +3,8 @@ import SwiftUI
 // Wijn zoeken op naam. Eerst snel in Claude's eigen kennis; staat de wijn er niet bij,
 // dan kan Claude op internet zoeken. Een tik op een treffer vult het formulier.
 struct WineSearchView: View {
+    // Zoekterm die al is ingevuld (bijv. vanuit de zoekbalk van het hoofdscherm); zoekt dan direct.
+    let initialQuery: String
     let onSelect: (LabelScanResult) -> Void
 
     @State private var query = ""
@@ -13,6 +15,11 @@ struct WineSearchView: View {
     @State private var lastQuery: String?
     @State private var searchedOnInternet = false
     @FocusState private var fieldFocused: Bool
+
+    init(initialQuery: String = "", onSelect: @escaping (LabelScanResult) -> Void) {
+        self.initialQuery = initialQuery
+        self.onSelect = onSelect
+    }
 
     var body: some View {
         List {
@@ -48,7 +55,19 @@ struct WineSearchView: View {
         }
         .navigationTitle("Zoek op naam")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear { fieldFocused = true }
+        .onAppear(perform: startInitialSearch)
+    }
+
+    // Meegegeven zoekterm direct zoeken; anders het invoerveld klaarzetten.
+    private func startInitialSearch() {
+        let text = initialQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard lastQuery == nil else { return }
+        if text.isEmpty {
+            fieldFocused = true
+        } else {
+            query = text
+            startSearch(onInternet: false)
+        }
     }
 
     // Wachten op Claude.

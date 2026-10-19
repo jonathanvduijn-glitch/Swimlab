@@ -11,16 +11,20 @@ struct WineListView: View {
     @State private var showingAdd = false
     @State private var showingSettings = false
     @State private var wineToDrink: Wine?
+    // Zoeken in alle wijnen ter wereld (via Claude) vanuit de zoekbalk.
+    @State private var worldSearchQuery = ""
+    @State private var showingWorldSearch = false
 
     var body: some View {
         NavigationStack {
             Group {
-                if wines.isEmpty {
+                if wines.isEmpty && searchText.isEmpty {
                     ContentUnavailableView(
                         "Nog geen wijnen",
                         systemImage: "wineglass",
-                        description: Text("Tik op + om je eerste etiket te scannen.")
+                        description: Text("Tik op + om je eerste etiket te scannen, of zoek hierboven een wijn op naam.")
                     )
+                    .searchable(text: $searchText, prompt: "Zoek een wijn")
                 } else {
                     wineList
                 }
@@ -44,6 +48,7 @@ struct WineListView: View {
                 }
             }
             .sheet(isPresented: $showingAdd) { AddWineView() }
+            .sheet(isPresented: $showingWorldSearch) { AddWineView(initialSearch: worldSearchQuery) }
             .sheet(isPresented: $showingSettings) { SettingsView() }
             .sheet(item: $wineToDrink) { wine in TastingSheet(wine: wine) }
         }
@@ -55,6 +60,10 @@ struct WineListView: View {
         let content = ListContent(wines: wines.filter { matchesFilters($0) })
 
         return List {
+            if !trimmedSearch.isEmpty {
+                worldSearchSection(found: !content.isEmpty)
+            }
+
             Section {
                 Picker("Locatie", selection: $filter) {
                     ForEach(LocationFilter.allCases) { option in
@@ -80,12 +89,27 @@ struct WineListView: View {
                 }
             }
         }
-        .searchable(text: $searchText, prompt: "Naam, druif, regio, gerecht of smaak")
-        .overlay {
-            if content.isEmpty && !searchText.isEmpty {
-                ContentUnavailableView.search(text: searchText)
+        .searchable(text: $searchText, prompt: "Zoek een wijn, druif, gerecht of smaak")
+    }
+
+    // Bovenaan bij het zoeken: de wijn opzoeken in alle wijnen ter wereld.
+    private func worldSearchSection(found: Bool) -> some View {
+        Section {
+            Button {
+                worldSearchQuery = trimmedSearch
+                showingWorldSearch = true
+            } label: {
+                Label("Zoek \"\(trimmedSearch)\" in alle wijnen", systemImage: "globe.europe.africa")
             }
+        } footer: {
+            Text(found
+                 ? "Hieronder staan de wijnen uit je eigen rek die passen."
+                 : "Deze wijn staat nog niet in je rek. Claude zoekt hem op en jij kiest welke je hebt.")
         }
+    }
+
+    private var trimmedSearch: String {
+        searchText.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     // Eén rij met veegacties.
